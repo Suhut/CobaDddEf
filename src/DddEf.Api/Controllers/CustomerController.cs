@@ -1,5 +1,5 @@
-﻿using DddEf.Application.UseCases.Products.Commands;
-using DddEf.Domain.Aggregates.Product.ValueObjects;
+﻿using DddEf.Application.UseCases.Customers.Commands;
+using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,17 +7,17 @@ namespace DddEf.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class CustomersController : ControllerBase
     {
         private readonly ISender _sender;
 
-        public ProductsController(ISender sender)
+        public CustomersController(ISender sender)
         {
             _sender = sender;
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<ProductId>> Create(CreateProductCommand request)
+        public async Task<ActionResult<CustomerId>> Create(CreateCustomerCommand request)
         {  
             return await _sender.Send(request);
         }

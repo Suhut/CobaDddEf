@@ -1,4 +1,5 @@
-﻿using DddEf.Domain.Common.Models;
+﻿using DddEf.Domain.Aggregates.Customer.ValueObjects;
+using DddEf.Domain.Common.Models;
 
 namespace DddEf.Domain.Aggregates.Product.ValueObjects;
 
@@ -25,5 +26,9 @@ public sealed class ProductId : ValueObject
     public override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
+    }
+    public static implicit operator Guid(ProductId id)
+    {
+        return id.Value;
     }
 }

@@ -25,6 +25,5 @@ public sealed class CustomerId : ValueObject
     public override IEnumerable<object> GetEqualityComponents()
     {
         yield return Value;
-    }
-
+    } 
 }
