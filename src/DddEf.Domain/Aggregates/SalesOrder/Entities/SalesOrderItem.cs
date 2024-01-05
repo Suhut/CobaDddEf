@@ -1,18 +1,19 @@
 ﻿using DddEf.Domain.Aggregates.Product.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
-using DddEf.Domain.Common.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DddEf.Domain.Aggregates.SalesOrder.Entities;
 
-public sealed class SalesOrderItem : EntityDet1<SalesOrderItemDet1Id>
+public sealed class SalesOrderItem // : EntityDet1<SalesOrderItemDet1Id>
 {
 #pragma warning disable CS8618
     private SalesOrderItem()
     {
-
+       
     }
-#pragma warning disable CS8618
-
+#pragma warning disable CS8618 
+    private Guid DetId { get; set; }
     public SalesOrderId Id { get; }
     public int RowNumber { get; private set; }
     public ProductId ProductId { get; private set; }
@@ -20,14 +21,15 @@ public sealed class SalesOrderItem : EntityDet1<SalesOrderItemDet1Id>
     public double? Price { get; private set; }
     public double? Total { get; private set; }
     public SalesOrderItem(
-                        SalesOrderItemDet1Id detId,
+                        //SalesOrderItemDet1Id detId, 
                         int rowNumber,
                         ProductId productId,
                        double qty,
                        double price
        )
-     : base(detId)
+     //: base(detId)
     {
+        DetId = Guid.NewGuid();
         RowNumber = rowNumber;
         ProductId = productId;
         Qty = qty;
@@ -40,7 +42,8 @@ public sealed class SalesOrderItem : EntityDet1<SalesOrderItemDet1Id>
                        double qty,
                        double price)
     {
-        return new(SalesOrderItemDet1Id.CreateUnique(), rowNumber, productId, qty, price);
+        //return new(SalesOrderItemDet1Id.CreateUnique(), rowNumber, productId, qty, price);
+        return new( rowNumber, productId, qty, price);
     }
 }
  

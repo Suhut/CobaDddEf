@@ -1,4 +1,5 @@
 ﻿using DddEf.Application.UseCases.Products.Commands;
+using DddEf.Domain.Aggregates.Product.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace DddEf.Api.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<Guid>> Create(CreateProductCommand request)
+        public async Task<ActionResult<ProductId>> Create(CreateProductCommand request)
         {  
             return await _sender.Send(request);
         }

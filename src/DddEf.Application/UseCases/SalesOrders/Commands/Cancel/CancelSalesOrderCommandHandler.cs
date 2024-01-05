@@ -1,6 +1,4 @@
-﻿using DddEf.Domain.Aggregates.SalesOrder;
-using DddEf.Domain.Aggregates.SalesOrder.Entities;
-using DddEf.Infrastructure.Persistence;
+﻿using DddEf.Infrastructure.Persistence;
 using MediatR;
 
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Cancel

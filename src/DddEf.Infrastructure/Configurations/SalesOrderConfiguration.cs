@@ -110,19 +110,11 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
         {
             sb.ToTable("Tx_SalesOrder_Item");
              
-            sb.WithOwner().HasForeignKey(m => m.Id); 
+            sb.WithOwner().HasForeignKey("Id"); 
+              
+            sb.HasIndex("Id", "RowNumber").IsUnique();
              
-            sb.HasIndex(m => new { m.Id, m.RowNumber }).IsUnique(); 
-           
-            sb.HasKey(nameof(SalesOrderItem.Det1Id));
-
-            sb.Property(sb => sb.Det1Id)
-                .HasColumnName(nameof(SalesOrderItem.Det1Id))
-                .ValueGeneratedNever()
-                .HasConversion(
-                    det1Id => det1Id.Value,
-                    value => SalesOrderItemDet1Id.Create(value)
-                    );
+            sb.HasKey("DetId"); 
 
             sb.Property(m => m.ProductId)
                .HasConversion(

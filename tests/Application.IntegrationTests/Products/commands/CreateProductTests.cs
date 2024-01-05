@@ -24,7 +24,7 @@ public class CreateProductTests : BaseTestFixture
         var productId = await SendAsync(command);
 
         // Assert
-        var product = await FindAsync<Product>(ProductId.Create(productId));
+        var product = await FindAsync<Product>(productId);
 
         product.Should().NotBeNull();
         product!.ProductCode.Should().Be(command.ProductCode);

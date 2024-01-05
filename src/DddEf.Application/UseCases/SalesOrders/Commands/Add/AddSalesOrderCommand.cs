@@ -1,5 +1,6 @@
 ﻿using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using DddEf.Domain.Aggregates.Product.ValueObjects;
+using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using DddEf.Domain.Common.ValueObjects;
 using MediatR;
 
@@ -12,7 +13,7 @@ public record AddSalesOrderCommand
     Address ShipAddress,
     Address BillAddress,
     List<SalesOrderItemVm> Items
-) : IRequest<Guid>;
+) : IRequest<SalesOrderId>;
 
 public record SalesOrderItemVm(
     ProductId ProductId,

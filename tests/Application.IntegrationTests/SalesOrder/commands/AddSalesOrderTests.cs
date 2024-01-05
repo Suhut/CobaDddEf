@@ -46,13 +46,13 @@ public class AddSalesOrderTests : BaseTestFixture
         (
             "Trans001",
             DateTime.Now.Date,
-            CustomerId.Create(customerId),
+            customerId,
             new Address("Blora", "Indonesia"),
             new Address("Jakarta", "Indonesia"),
             new List<SalesOrderItemVm>
             {
-                new SalesOrderItemVm(ProductId.Create(productId1),1,1000),
-                new SalesOrderItemVm(ProductId.Create(productId2),2,2000)
+                new SalesOrderItemVm(productId1,1,1000),
+                new SalesOrderItemVm(productId2,2,2000)
             }
         );
 
@@ -62,9 +62,9 @@ public class AddSalesOrderTests : BaseTestFixture
 
 
         // Assert
-        var salesOrder = await FindAsync<SalesOrder>(SalesOrderId.Create(salesOrderId));
-
-        salesOrder.Should().NotBeNull();
+        var salesOrder = await FindAsync<SalesOrder>(salesOrderId);
+      
+        salesOrder.Should().NotBeNull(); 
         //salesOrder!.TransNo.Should().Be(createSalesOrderCommand.TransNo);
         //salesOrder.TransDate.Should().Be(createSalesOrderCommand.TransDate);
         //salesOrder.Status.Should().Be("Open");

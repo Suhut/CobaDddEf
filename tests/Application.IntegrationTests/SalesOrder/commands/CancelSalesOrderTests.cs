@@ -47,13 +47,13 @@ public class CancelSalesOrderTests : BaseTestFixture
         (
             "Trans001",
             DateTime.Now.Date,
-            CustomerId.Create(customerId),
+            customerId,
             new Address("Blora", "Indonesia"),
             new Address("Jakarta", "Indonesia"),
             new List<SalesOrderItemVm>
             {
-                new SalesOrderItemVm(ProductId.Create(productId1),1,1000),
-                new SalesOrderItemVm(ProductId.Create(productId2),2,2000)
+                new SalesOrderItemVm(productId1,1,1000),
+                new SalesOrderItemVm(productId2,2,2000)
             }
         );
 
@@ -64,7 +64,7 @@ public class CancelSalesOrderTests : BaseTestFixture
 
         var cancelSalesOrderCommand = new CancelSalesOrderCommand
         (
-            SalesOrderId.Create(salesOrderId) 
+           salesOrderId
         );
 
         // Act
@@ -72,7 +72,7 @@ public class CancelSalesOrderTests : BaseTestFixture
 
 
         // Assert
-        var salesOrder = await FindAsync<SalesOrder>(SalesOrderId.Create(salesOrderId));
+        var salesOrder = await FindAsync<SalesOrder>(salesOrderId);
 
         salesOrder.Should().NotBeNull();
        }

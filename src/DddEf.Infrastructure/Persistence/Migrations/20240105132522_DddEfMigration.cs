@@ -61,7 +61,7 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                 name: "Tx_SalesOrder_Item",
                 columns: table => new
                 {
-                    Det1Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RowNumber = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -71,7 +71,7 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tx_SalesOrder_Item", x => x.Det1Id);
+                    table.PrimaryKey("PK_Tx_SalesOrder_Item", x => x.DetId);
                     table.ForeignKey(
                         name: "FK_Tx_SalesOrder_Item_Tx_SalesOrder_Id",
                         column: x => x.Id,

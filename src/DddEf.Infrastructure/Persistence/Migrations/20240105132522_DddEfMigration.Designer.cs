@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DddEf.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DddEfContext))]
-    [Migration("20240105114339_DddEfMigration")]
+    [Migration("20240105132522_DddEfMigration")]
     partial class DddEfMigration
     {
         /// <inheritdoc />
@@ -96,9 +96,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                 {
                     b.OwnsMany("DddEf.Domain.Aggregates.SalesOrder.Entities.SalesOrderItem", "Items", b1 =>
                         {
-                            b1.Property<Guid>("Det1Id")
-                                .HasColumnType("uniqueidentifier")
-                                .HasColumnName("Det1Id");
+                            b1.Property<Guid>("DetId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
 
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uniqueidentifier");
@@ -118,7 +118,7 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                             b1.Property<double?>("Total")
                                 .HasColumnType("float");
 
-                            b1.HasKey("Det1Id");
+                            b1.HasKey("DetId");
 
                             b1.HasIndex("Id", "RowNumber")
                                 .IsUnique();
