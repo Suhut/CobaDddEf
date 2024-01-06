@@ -1,5 +1,7 @@
-﻿using DddEf.Application.Common;
+﻿using DddEf.Application.Common.Abstractions;
+using DddEf.Application.Common.Interfaces;
 using DddEf.Infrastructure.Persistence;
+using DddEf.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,7 @@ public static class ConfigureServices
                       b => b.MigrationsAssembly(typeof(DddEfContext).Assembly.FullName)).LogTo(Console.WriteLine));
 
         services.AddScoped<IDddEfContext>(provider => provider.GetService<DddEfContext>());
+        services.AddTransient<IDateTimeProvider, DateTimeProvider>();
 
 
         return services;

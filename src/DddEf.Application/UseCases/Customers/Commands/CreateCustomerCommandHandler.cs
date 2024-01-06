@@ -1,4 +1,4 @@
-﻿using DddEf.Application.Common;
+﻿using DddEf.Application.Common.Interfaces;
 using DddEf.Domain.Aggregates.Customer;
 using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using MediatR;

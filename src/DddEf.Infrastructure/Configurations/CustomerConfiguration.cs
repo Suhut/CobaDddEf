@@ -35,6 +35,11 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         //    .SetPropertyAccessMode(PropertyAccessMode.Field)
         //    ;
 
+
+        builder.Property("CreatedDateOffset"); 
+
+        builder.Property("ModifiedDateOffset");
+
     }
 }
 

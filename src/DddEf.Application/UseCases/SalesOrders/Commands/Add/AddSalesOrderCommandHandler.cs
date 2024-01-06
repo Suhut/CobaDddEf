@@ -1,4 +1,4 @@
-﻿using DddEf.Application.Common;
+﻿using DddEf.Application.Common.Interfaces;
 using DddEf.Domain.Aggregates.SalesOrder;
 using DddEf.Domain.Aggregates.SalesOrder.Entities;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;

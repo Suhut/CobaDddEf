@@ -3,12 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DddEf.Domain.Common.Models;
 
-public class AuditableEntity
-{ 
-    public DateTime? CreatedDate { get; set; } 
-    public DateTime? ModifiedDate { get; set; }
-    public DateTimeOffset? CreatedDateOffset { get; set; }
-    public DateTimeOffset? ModifiedDateOffset { get; set; }
+public abstract class AuditableEntity
+{
+    private DateTimeOffset? CreatedDateOffset { get; set; }
+    private DateTimeOffset? ModifiedDateOffset { get; set; }
 
     [ConcurrencyCheck]
     [Column("VersionId")]
@@ -19,5 +17,15 @@ public class AuditableEntity
     {
         _versionId++;
     }
+    public void SetCreatedDateOffset(DateTimeOffset dt)
+    {
+        CreatedDateOffset = dt;
+    }
+
+    public void SetModifiedDateOffset(DateTimeOffset dt)
+    {
+        ModifiedDateOffset = dt;
+    }
+
 
 }

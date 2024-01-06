@@ -35,6 +35,10 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         //    .SetPropertyAccessMode(PropertyAccessMode.Field)
         //    ;
 
+        builder.Property("CreatedDateOffset");
+
+        builder.Property("ModifiedDateOffset");
+
     }
 }
 

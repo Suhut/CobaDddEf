@@ -101,6 +101,13 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
         //           .HasKey("DetId");
 
         //   });
+
+
+
+        builder.Property("CreatedDateOffset");
+
+        builder.Property("ModifiedDateOffset");
+
     }
 
 

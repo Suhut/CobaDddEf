@@ -3,7 +3,7 @@ using DddEf.Domain.Common.Models;
 
 namespace DddEf.Domain.Aggregates.Customer;
 
-public sealed class Customer : AggregateRoot<CustomerId>
+public sealed class Customer :  AggregateRoot<CustomerId> 
 {
 #pragma warning disable CS8618
     private Customer()
@@ -28,5 +28,16 @@ public sealed class Customer : AggregateRoot<CustomerId>
     public string CustomerCode { get; private set; }
     public string CustomerName { get; private set; }
 
+    //private DateTimeOffset? CreatedDateOffset { get; set; }
+    //private DateTimeOffset? ModifiedDateOffset { get; set; }
 
+    //public void SetCreatedDateOffset(DateTimeOffset dt)
+    //{
+    //    CreatedDateOffset = dt;
+    //}
+
+    //public void SetModifiedDateOffset(DateTimeOffset dt)
+    //{
+    //    ModifiedDateOffset = dt;
+    //}
 }

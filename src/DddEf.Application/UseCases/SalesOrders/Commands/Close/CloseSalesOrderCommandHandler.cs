@@ -1,4 +1,4 @@
-﻿using DddEf.Application.Common;
+﻿using DddEf.Application.Common.Interfaces;
 using MediatR;
 
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Close

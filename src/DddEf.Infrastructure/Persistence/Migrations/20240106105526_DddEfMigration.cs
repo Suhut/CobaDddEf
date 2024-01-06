@@ -17,7 +17,10 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CustomerCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CustomerName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
+                    CustomerName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    CreatedDateOffset = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedDateOffset = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    VersionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +33,10 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
+                    ProductName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    CreatedDateOffset = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedDateOffset = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    VersionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +56,10 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     ShipAddress_Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     BillAddress_City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     BillAddress_Country = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Total = table.Column<double>(type: "float", nullable: false)
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    CreatedDateOffset = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    ModifiedDateOffset = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    VersionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

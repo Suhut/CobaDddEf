@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DddEf.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DddEfContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class DddEfContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTimeOffset?>("CreatedDateOffset")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("CustomerCode")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -36,6 +39,14 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTimeOffset?>("ModifiedDateOffset")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("_versionId")
+                        .IsConcurrencyToken()
+                        .HasColumnType("int")
+                        .HasColumnName("VersionId");
 
                     b.HasKey("Id");
 
@@ -47,6 +58,12 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTimeOffset?>("CreatedDateOffset")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("ModifiedDateOffset")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<string>("ProductCode")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -56,6 +73,11 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
+
+                    b.Property<int>("_versionId")
+                        .IsConcurrencyToken()
+                        .HasColumnType("int")
+                        .HasColumnName("VersionId");
 
                     b.HasKey("Id");
 
@@ -67,8 +89,14 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTimeOffset?>("CreatedDateOffset")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("ModifiedDateOffset")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -83,6 +111,11 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<string>("TransNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("_versionId")
+                        .IsConcurrencyToken()
+                        .HasColumnType("int")
+                        .HasColumnName("VersionId");
 
                     b.HasKey("Id");
 

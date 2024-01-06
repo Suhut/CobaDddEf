@@ -1,6 +1,6 @@
 ﻿namespace DddEf.Domain.Common.Models;
 
-public abstract class Entity<TID> : IEquatable<Entity<TID>> where TID : notnull
+public abstract class Entity<TID> : IEquatable<Entity<TID>> where TID : notnull 
 {
     public TID Id { get; protected set; }
 
@@ -12,7 +12,8 @@ public abstract class Entity<TID> : IEquatable<Entity<TID>> where TID : notnull
     protected Entity() 
     {
     }
-#pragma warning disable CS8618
+#pragma warning disable CS8618  
+
     public override bool Equals(object? obj)
     {
         return obj is Entity<TID> entity && Id.Equals(entity.Id);
