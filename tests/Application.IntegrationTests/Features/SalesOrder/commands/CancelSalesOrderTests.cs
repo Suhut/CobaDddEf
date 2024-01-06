@@ -1,13 +1,13 @@
 ﻿using DddEf.Application.UseCases.Customers.Commands;
 using DddEf.Application.UseCases.Products.Commands;
 using DddEf.Application.UseCases.SalesOrders.Commands.Add;
-using DddEf.Application.UseCases.SalesOrders.Commands.Cancel;
-using DddEf.Domain.Aggregates.SalesOrder;
+using DddEf.Application.UseCases.SalesOrders.Commands.Cancel; 
 using DddEf.Domain.Common.ValueObjects;
+using DddEf.Domain.Aggregates.SalesOrder;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DddEf.Application.IntegrationTests.Customers.commands;
+namespace DddEf.Application.IntegrationTests.Features.SalesOrder.commands;
 
 using static Testing;
 
@@ -55,7 +55,7 @@ public class CancelSalesOrderTests : BaseTestFixture
         );
 
 
-       
+
         var salesOrderId = await SendAsync(createSalesOrderCommand);
 
 
@@ -69,8 +69,8 @@ public class CancelSalesOrderTests : BaseTestFixture
 
 
         // Assert
-        var salesOrder = await FindAsync<SalesOrder>(salesOrderId);
+        var salesOrder = await FindAsync <DddEf.Domain.Aggregates.SalesOrder.SalesOrder >(salesOrderId);
 
         salesOrder.Should().NotBeNull();
-       }
+    }
 }

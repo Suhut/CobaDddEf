@@ -1,7 +1,6 @@
 ﻿using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using DddEf.Domain.Aggregates.Product.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder;
-using DddEf.Domain.Aggregates.SalesOrder.Entities;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

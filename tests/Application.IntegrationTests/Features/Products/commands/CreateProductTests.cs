@@ -4,15 +4,15 @@ using DddEf.Domain.Aggregates.Product.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DddEf.Application.IntegrationTests.Products.commands;
+namespace DddEf.Application.IntegrationTests.Features.Products.commands;
 
 using static Testing;
 
 public class CreateProductTests : BaseTestFixture
-{ 
+{
     [Test]
     public async Task ShouldCreateProduct()
-    { 
+    {
         // Arrange
         var command = new CreateProductCommand
         (
@@ -28,6 +28,6 @@ public class CreateProductTests : BaseTestFixture
 
         product.Should().NotBeNull();
         product!.ProductCode.Should().Be(command.ProductCode);
-        product.ProductName.Should().Be(command.ProductName); 
+        product.ProductName.Should().Be(command.ProductName);
     }
 }

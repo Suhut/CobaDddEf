@@ -4,12 +4,12 @@ using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DddEf.Application.IntegrationTests.Customers.commands;
+namespace DddEf.Application.IntegrationTests.Features.Customers.commands;
 
 using static Testing;
 
 public class CreateProductTests : BaseTestFixture
-{ 
+{
     [Test]
     public async Task ShouldCreateCustomer()
     {
@@ -28,8 +28,8 @@ public class CreateProductTests : BaseTestFixture
 
         customer.Should().NotBeNull();
         customer!.CustomerCode.Should().Be(command.CustomerCode);
-        customer.CustomerName.Should().Be(command.CustomerName); 
+        customer.CustomerName.Should().Be(command.CustomerName);
 
-        
+
     }
 }

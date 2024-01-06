@@ -1,20 +1,19 @@
 ﻿using DddEf.Application.UseCases.Customers.Commands;
 using DddEf.Application.UseCases.Products.Commands;
 using DddEf.Application.UseCases.SalesOrders.Commands.Add;
-using DddEf.Application.UseCases.SalesOrders.Commands.RemoveLine;
-using DddEf.Domain.Aggregates.SalesOrder;
+using DddEf.Application.UseCases.SalesOrders.Commands.Close;
 using DddEf.Domain.Common.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DddEf.Application.IntegrationTests.Customers.commands;
+namespace DddEf.Application.IntegrationTests.Features.SalesOrder.commands;
 
 using static Testing;
 
-public class RemoveLineSalesOrderTests : BaseTestFixture
+public class CloseSalesOrderTests : BaseTestFixture
 {
     [Test]
-    public async Task ShouldRemoveLineCustomer()
+    public async Task ShouldCloseCustomer()
     {
         // Arrange
         var createCustomerCommand = new CreateCustomerCommand
@@ -55,11 +54,11 @@ public class RemoveLineSalesOrderTests : BaseTestFixture
         );
 
 
-       
+
         var salesOrderId = await SendAsync(createSalesOrderCommand);
 
 
-        var cancelSalesOrderCommand = new RemoveLineSalesOrderCommand
+        var cancelSalesOrderCommand = new CloseSalesOrderCommand
         (
            salesOrderId
         );
@@ -69,8 +68,8 @@ public class RemoveLineSalesOrderTests : BaseTestFixture
 
 
         // Assert
-        var salesOrder = await FindAsync<SalesOrder>(salesOrderId);
+        var salesOrder = await FindAsync<DddEf.Domain.Aggregates.SalesOrder.SalesOrder>(salesOrderId);
 
         salesOrder.Should().NotBeNull();
-       }
+    }
 }
