@@ -1,18 +1,13 @@
-﻿using DddEf.Domain.Aggregates.SalesOrder;
+﻿using DddEf.Application.Common;
+using DddEf.Domain.Aggregates.SalesOrder;
 using DddEf.Domain.Aggregates.SalesOrder.Entities;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
-using DddEf.Infrastructure.Persistence;
 using MediatR;
 
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Add
 {
-    public sealed class AddSalesOrderCommandHandler : IRequestHandler<AddSalesOrderCommand, SalesOrderId>
-    {
-        private readonly DddEfContext _dbContext;
-        public AddSalesOrderCommandHandler(DddEfContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    public sealed class AddSalesOrderCommandHandler(IDddEfContext applicationDbContext) : IRequestHandler<AddSalesOrderCommand, SalesOrderId>
+    { 
         public async Task<SalesOrderId> Handle(AddSalesOrderCommand request, CancellationToken cancellationToken)
         {
             var rowNumber = 1;
@@ -29,8 +24,8 @@ namespace DddEf.Application.UseCases.SalesOrders.Commands.Add
                  item.Price
                  )));
 
-            await _dbContext.SalesOrders.AddAsync(salesOrder);
-            await _dbContext.SaveChangesAsync();
+            await applicationDbContext.SalesOrders.AddAsync(salesOrder, cancellationToken);
+            await applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return salesOrder.Id;
         }

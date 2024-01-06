@@ -1,25 +1,19 @@
-﻿using DddEf.Infrastructure.Persistence;
+﻿using DddEf.Application.Common;
 using MediatR;
-using System.Threading;
 
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Close
 {
-    public sealed class CloseSalesOrderCommandHandler : IRequestHandler<CloseSalesOrderCommand, Guid>
+    public sealed class CloseSalesOrderCommandHandler(IDddEfContext applicationDbContext) : IRequestHandler<CloseSalesOrderCommand, Guid>
     {
-        private readonly DddEfContext _dbContext;
-        public CloseSalesOrderCommandHandler(DddEfContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
         public async Task<Guid> Handle(CloseSalesOrderCommand request, CancellationToken cancellationToken)
         {
-            var salesOrder = await _dbContext.SalesOrders.FindAsync(request.Id);
+            var salesOrder = await applicationDbContext.SalesOrders.FindAsync(new object[] { request.Id }, cancellationToken);
 
             ArgumentNullException.ThrowIfNull(salesOrder);
 
-            salesOrder.Close(); 
-            _dbContext.SalesOrders.Update(salesOrder);
-            await _dbContext.SaveChangesAsync();
+            salesOrder.Close();
+            applicationDbContext.SalesOrders.Update(salesOrder);
+            await applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return salesOrder.Id.Value;
         }

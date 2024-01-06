@@ -1,19 +1,13 @@
-﻿using DddEf.Domain.Aggregates.Customer;
+﻿using DddEf.Application.Common;
+using DddEf.Domain.Aggregates.Customer;
 using DddEf.Domain.Aggregates.Customer.ValueObjects;
-using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
-using DddEf.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace DddEf.Application.UseCases.Customers.Commands
 {
-    public sealed class CreateProductCommandHandler : IRequestHandler<CreateCustomerCommand, CustomerId>
-    {
-        private readonly DddEfContext _dbContext;
-        public CreateProductCommandHandler(DddEfContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+    public sealed class CreateProductCommandHandler (IDddEfContext applicationDbContext) : IRequestHandler<CreateCustomerCommand, CustomerId>
+    { 
         public async Task<CustomerId> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = Customer.Create
@@ -21,14 +15,14 @@ namespace DddEf.Application.UseCases.Customers.Commands
                  request.CustomerCode,
                  request.CustomerName
             );
-             await _dbContext.Customers.AddAsync(customer);
-             
-            await _dbContext.SaveChangesAsync();
+            await applicationDbContext.Customers.AddAsync(customer, cancellationToken);
 
-            CustomerId[] arrs= {   CustomerId.Create(customer.Id.Value), CustomerId.CreateUnique() };
+            await applicationDbContext.SaveChangesAsync(cancellationToken);
 
-            var customers= await _dbContext.Customers.Where(x=>x.CustomerCode == request.CustomerCode && !arrs.Contains(x.Id)).ToListAsync();
-            return  customer.Id;
+            CustomerId[] arrs = { CustomerId.Create(customer.Id.Value), CustomerId.CreateUnique() };
+
+            var customers = await applicationDbContext.Customers.Where(x => x.CustomerCode == request.CustomerCode && !arrs.Contains(x.Id)).ToListAsync(cancellationToken);
+            return customer.Id;
         }
     }
 }

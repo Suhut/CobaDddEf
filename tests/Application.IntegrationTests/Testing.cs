@@ -1,6 +1,5 @@
 ﻿using DddEf.Infrastructure.Persistence;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,7 +12,9 @@ namespace DddEf.Application.IntegrationTests;
 [SetUpFixture]
 public partial class Testing
 {
+#pragma warning disable NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
     private static WebApplicationFactory<Program> _factory = null!;
+#pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
     private static IConfiguration _configuration = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
     private static Respawner _checkpoint = null!;

@@ -1,24 +1,19 @@
-﻿using DddEf.Infrastructure.Persistence;
+﻿using DddEf.Application.Common;
 using MediatR;
 
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Cancel
 {
-    public sealed class CancelSalesOrderCommandHandler : IRequestHandler<CancelSalesOrderCommand, Guid>
+    public sealed class CancelSalesOrderCommandHandler(IDddEfContext applicationDbContext) : IRequestHandler<CancelSalesOrderCommand, Guid>
     {
-        private readonly DddEfContext _dbContext;
-        public CancelSalesOrderCommandHandler(DddEfContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
         public async Task<Guid> Handle(CancelSalesOrderCommand request, CancellationToken cancellationToken)
         {
-            var salesOrder = await _dbContext.SalesOrders.FindAsync(request.Id);
+            var salesOrder = await applicationDbContext.SalesOrders.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
 
             ArgumentNullException.ThrowIfNull(salesOrder);
 
-            salesOrder.Cancel(); 
-            _dbContext.SalesOrders.Update(salesOrder);
-            await _dbContext.SaveChangesAsync();
+            salesOrder.Cancel();
+            applicationDbContext.SalesOrders.Update(salesOrder);
+            await applicationDbContext.SaveChangesAsync(cancellationToken);
 
             return salesOrder.Id.Value;
         }
