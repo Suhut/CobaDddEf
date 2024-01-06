@@ -1,14 +1,13 @@
 ﻿using DddEf.Application.UseCases.Customers.Commands;
 using DddEf.Application.UseCases.Products.Commands;
 using DddEf.Application.UseCases.SalesOrders.Commands.Add;
-using DddEf.Application.UseCases.SalesOrders.Commands.Close;
 using DddEf.Domain.Common.ValueObjects;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
-using System.Data;
+using DddEf.Domain.Aggregates.SalesOrder;
 
-namespace DddEf.Application.IntegrationTests.Features.SalesOrder.commands;
+namespace DddEf.Application.IntegrationTests.Features.SalesOrders;
 
 using static Testing;
 
@@ -60,8 +59,8 @@ public class ConcurrencyTransactionTest : BaseTestFixture
         var salesOrderId = await SendAsync(createSalesOrderCommand);
 
 
-        var entity1 = await FindAsync<DddEf.Domain.Aggregates.SalesOrder.SalesOrder>(salesOrderId);
-        var entity2 = await FindAsync<DddEf.Domain.Aggregates.SalesOrder.SalesOrder>(salesOrderId);
+        var entity1 = await FindAsync<SalesOrder>(salesOrderId);
+        var entity2 = await FindAsync<SalesOrder>(salesOrderId);
 
 
         entity1.Close();

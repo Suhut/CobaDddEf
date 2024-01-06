@@ -1,19 +1,20 @@
 ﻿using DddEf.Application.UseCases.Customers.Commands;
 using DddEf.Application.UseCases.Products.Commands;
 using DddEf.Application.UseCases.SalesOrders.Commands.Add;
-using DddEf.Application.UseCases.SalesOrders.Commands.Close;
+using DddEf.Application.UseCases.SalesOrders.Commands.Cancel; 
 using DddEf.Domain.Common.ValueObjects;
+using DddEf.Domain.Aggregates.SalesOrder;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DddEf.Application.IntegrationTests.Features.SalesOrder.commands;
+namespace DddEf.Application.IntegrationTests.Features.SalesOrders.commands;
 
 using static Testing;
 
-public class CloseSalesOrderTests : BaseTestFixture
+public class CancelSalesOrderTests : BaseTestFixture
 {
     [Test]
-    public async Task ShouldCloseCustomer()
+    public async Task ShouldCancelCustomer()
     {
         // Arrange
         var createCustomerCommand = new CreateCustomerCommand
@@ -58,17 +59,17 @@ public class CloseSalesOrderTests : BaseTestFixture
         var salesOrderId = await SendAsync(createSalesOrderCommand);
 
 
-        var closeSalesOrderCommand = new CloseSalesOrderCommand
+        var cancelSalesOrderCommand = new CancelSalesOrderCommand
         (
            salesOrderId
         );
 
         // Act
-        await SendAsync(closeSalesOrderCommand);
+        await SendAsync(cancelSalesOrderCommand);
 
 
         // Assert
-        var salesOrder = await FindAsync<DddEf.Domain.Aggregates.SalesOrder.SalesOrder>(salesOrderId);
+        var salesOrder = await FindAsync <SalesOrder >(salesOrderId);
 
         salesOrder.Should().NotBeNull();
     }
