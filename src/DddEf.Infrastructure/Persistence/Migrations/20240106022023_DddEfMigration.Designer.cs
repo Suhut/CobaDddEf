@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DddEf.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DddEfContext))]
-    [Migration("20240105132522_DddEfMigration")]
+    [Migration("20240106022023_DddEfMigration")]
     partial class DddEfMigration
     {
         /// <inheritdoc />
@@ -102,6 +102,10 @@ namespace DddEf.Infrastructure.Persistence.Migrations
 
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("LineStatus")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
 
                             b1.Property<double?>("Price")
                                 .HasColumnType("float");

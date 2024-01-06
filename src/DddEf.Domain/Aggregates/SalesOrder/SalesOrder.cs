@@ -20,7 +20,7 @@ public sealed class SalesOrder : AggregateRoot<SalesOrderId>
     public CustomerId CustomerId { get; private set; }
     public Address ShipAddress { get; private set; }
     public Address BillAddress { get; private set; }
-    public IReadOnlyList<SalesOrderItem> Items => _items.AsReadOnly();
+    public IReadOnlyList<SalesOrderItem> Items => (_items.OrderBy(p=>p.RowNumber)).ToList().AsReadOnly();
 
     private readonly List<SalesOrderItem> _items = new();
     public double Total { get; private set; }
@@ -52,6 +52,22 @@ public sealed class SalesOrder : AggregateRoot<SalesOrderId>
 
     public void Cancel()
     { 
-        Status = "Cancel"; 
+        Status = "Cancelled"; 
     }
+
+    public void Close()
+    {
+        Status = "Closed";
+        foreach(SalesOrderItem item in _items)
+        {
+            item.Close();
+        }
+    }
+
+    public void RemoveLine()
+    {
+        var item= _items.OrderBy(p=>p.RowNumber).FirstOrDefault();
+        _items.Remove(item);  
+    }
+
 }

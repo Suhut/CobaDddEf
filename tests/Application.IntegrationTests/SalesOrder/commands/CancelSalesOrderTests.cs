@@ -2,10 +2,7 @@
 using DddEf.Application.UseCases.Products.Commands;
 using DddEf.Application.UseCases.SalesOrders.Commands.Add;
 using DddEf.Application.UseCases.SalesOrders.Commands.Cancel;
-using DddEf.Domain.Aggregates.Customer.ValueObjects;
-using DddEf.Domain.Aggregates.Product.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder;
-using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using DddEf.Domain.Common.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;

@@ -67,7 +67,8 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Qty = table.Column<double>(type: "float", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true),
-                    Total = table.Column<double>(type: "float", nullable: true)
+                    Total = table.Column<double>(type: "float", nullable: true),
+                    LineStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

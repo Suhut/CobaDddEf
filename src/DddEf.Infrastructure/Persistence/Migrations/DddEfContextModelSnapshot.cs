@@ -100,6 +100,10 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<string>("LineStatus")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
                             b1.Property<double?>("Price")
                                 .HasColumnType("float");
 

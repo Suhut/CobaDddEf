@@ -124,9 +124,11 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
                    ;
 
         });
+         
 
         builder.Navigation(s => s.Items).Metadata.SetField("_items");
         builder.Navigation(s => s.Items).UsePropertyAccessMode(PropertyAccessMode.Field);
+        
 
     }
 

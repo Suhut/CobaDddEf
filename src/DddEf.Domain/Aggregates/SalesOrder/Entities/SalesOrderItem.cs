@@ -1,5 +1,6 @@
 ﻿using DddEf.Domain.Aggregates.Product.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
+using System.Threading.Channels;
 
 namespace DddEf.Domain.Aggregates.SalesOrder.Entities;
 
@@ -18,6 +19,7 @@ public sealed class SalesOrderItem
     public double? Qty { get; private set; }
     public double? Price { get; private set; }
     public double? Total { get; private set; }
+    public string LineStatus { get; private set; }
     public SalesOrderItem( 
                         int rowNumber,
                         ProductId productId,
@@ -31,6 +33,7 @@ public sealed class SalesOrderItem
         Qty = qty;
         Price = price;
         Total = qty * price;
+        LineStatus = "Open";
     }
     public static SalesOrderItem Create(
                         int rowNumber,
@@ -39,6 +42,11 @@ public sealed class SalesOrderItem
                        double price)
     { 
         return new( rowNumber, productId, qty, price);
+    }
+
+    public void Close()
+    {
+        LineStatus = "Closed";
     }
 }
  
