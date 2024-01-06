@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DddEf.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DddEfContext))]
-    [Migration("20240106022023_DddEfMigration")]
+    [Migration("20240106040018_DddEfMigration")]
     partial class DddEfMigration
     {
         /// <inheritdoc />

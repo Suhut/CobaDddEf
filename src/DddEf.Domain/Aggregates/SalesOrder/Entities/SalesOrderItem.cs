@@ -1,6 +1,5 @@
 ﻿using DddEf.Domain.Aggregates.Product.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
-using System.Threading.Channels;
 
 namespace DddEf.Domain.Aggregates.SalesOrder.Entities;
 
@@ -13,7 +12,7 @@ public sealed class SalesOrderItem
     }
 #pragma warning disable CS8618 
     private Guid DetId { get; set; }
-    public SalesOrderId Id { get; }
+    private SalesOrderId Id { get; }
     public int RowNumber { get; private set; }
     public ProductId ProductId { get; private set; }
     public double? Qty { get; private set; }
