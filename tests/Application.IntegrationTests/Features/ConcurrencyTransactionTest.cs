@@ -1,38 +1,77 @@
 ﻿using DddEf.Application.UseCases.Customers.Commands;
-using DddEf.Domain.Aggregates.Customer;
+using DddEf.Application.UseCases.Products.Commands;
+using DddEf.Application.UseCases.SalesOrders.Commands.Add;
+using DddEf.Application.UseCases.SalesOrders.Commands.Close;
+using DddEf.Domain.Common.ValueObjects;
 using FluentAssertions;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using System.Data;
 
-namespace DddEf.Application.IntegrationTests.Features;
+namespace DddEf.Application.IntegrationTests.Features.SalesOrder.commands;
 
 using static Testing;
+
 public class ConcurrencyTransactionTest : BaseTestFixture
 {
-
     [Test]
-    public async Task Test123ya()
+    public async Task ShouldError()
     {
- 
-        var command01 = new CreateCustomerCommand
+        // Arrange
+        var createCustomerCommand = new CreateCustomerCommand
         (
-            "Code001",
-            "Name001"
-        ); 
-        var customer01 = await SendAsync(command01); 
-        
+            "CustomerCode01",
+            "CustomerName01"
+        );
 
-        var entity01_1 = await FindAsync<Customer>(customer01);
-        var entity01_2 = await FindAsync<Customer>(customer01);
+        var customerId = await SendAsync(createCustomerCommand);
 
-        //entity01_1.CustomerCode = "Item01 Name update 1";
-        //await UpdateAsync(entity1);
+        var createProductCommand1 = new CreateProductCommand
+        (
+            "ProductCode001",
+            "ProductName001"
+        );
+        var productId1 = await SendAsync(createProductCommand1);
 
-        //entity2.ItemName = "Item01 Name update 2";
+        var createProductCommand2 = new CreateProductCommand
+        (
+            "ProductCode002",
+            "ProductName002"
+        );
+        var productId2 = await SendAsync(createProductCommand2);
 
-        //await FluentActions.Invoking(() =>
-        //    UpdateAsync(entity2)).Should().ThrowAsync<ConcurrencyException>();
+
+        var createSalesOrderCommand = new AddSalesOrderCommand
+        (
+            "Trans001",
+            DateTime.Now.Date,
+            customerId,
+            new Address("Blora", "Indonesia"),
+            new Address("Jakarta", "Indonesia"),
+            new List<SalesOrderItemVm>
+            {
+                new SalesOrderItemVm(productId1,1,1000),
+                new SalesOrderItemVm(productId2,2,2000)
+            }
+        );
 
 
+
+        var salesOrderId = await SendAsync(createSalesOrderCommand);
+
+
+        var entity1 = await FindAsync<DddEf.Domain.Aggregates.SalesOrder.SalesOrder>(salesOrderId);
+        var entity2 = await FindAsync<DddEf.Domain.Aggregates.SalesOrder.SalesOrder>(salesOrderId);
+
+
+        entity1.Close();
+        await UpdateAsync(entity1);
+
+        // Act  
+        entity2.Cancel();
+
+        // Assert
+        FluentActions.Invoking(() =>
+               UpdateAsync(entity2)).Should().ThrowAsync<DbUpdateConcurrencyException>();
     }
-
 }

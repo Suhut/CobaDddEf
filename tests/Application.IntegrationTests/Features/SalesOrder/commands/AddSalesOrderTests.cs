@@ -13,7 +13,7 @@ using static Testing;
 public class AddSalesOrderTests : BaseTestFixture
 {
     [Test]
-    public async Task ShouldCreateCustomer()
+    public async Task ShouldCreateSalesOrder()
     {
         // Arrange
         var createCustomerCommand = new CreateCustomerCommand

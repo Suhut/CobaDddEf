@@ -58,13 +58,13 @@ public class CloseSalesOrderTests : BaseTestFixture
         var salesOrderId = await SendAsync(createSalesOrderCommand);
 
 
-        var cancelSalesOrderCommand = new CloseSalesOrderCommand
+        var closeSalesOrderCommand = new CloseSalesOrderCommand
         (
            salesOrderId
         );
 
         // Act
-        await SendAsync(cancelSalesOrderCommand);
+        await SendAsync(closeSalesOrderCommand);
 
 
         // Assert

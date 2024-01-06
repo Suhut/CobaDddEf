@@ -97,6 +97,18 @@ public partial class Testing
         return await context.Set<TEntity>().CountAsync();
     }
 
+    public static async Task UpdateAsync<TEntity>(TEntity entity)
+         where TEntity : class
+    {
+        using var scope = _scopeFactory.CreateScope();
+
+        var context = scope.ServiceProvider.GetService<DddEfContext>();
+
+        context.Update(entity);
+        await context.SaveChangesAsync();
+    }
+
+
     [OneTimeTearDown]
     public void RunAfterAnyTests()
     {

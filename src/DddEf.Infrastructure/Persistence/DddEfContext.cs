@@ -60,19 +60,19 @@ namespace DddEf.Infrastructure.Persistence
 
                 }
             }
-            //try
-            //{
-            return await base.SaveChangesAsync(cancellationToken);
-            //}
-            //catch (DbUpdateConcurrencyException ex)
-            //{ 
-            //    throw;
-            //}
-            //catch (Exception ex)
-            //{
+            try
+            {
+                return await base.SaveChangesAsync(cancellationToken);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
 
-            //    throw;
-            //}
+                throw;
+            }
 
         }
         protected override void OnModelCreating(ModelBuilder builder)
