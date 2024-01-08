@@ -17,27 +17,27 @@ public class CancelSalesOrderTests : BaseTestFixture
     public async Task ShouldCancelCustomer()
     {
         // Arrange
-        var createCustomerCommand = new CreateCustomerCommand
+        var addCustomerCommand = new AddCustomerCommand
         (
             "CustomerCode01",
             "CustomerName01"
         );
 
-        var customerId = await SendAsync(createCustomerCommand);
+        var customerId = await SendAsync(addCustomerCommand);
 
-        var createItemCommand1 = new CreateItemCommand
+        var addItemCommand1 = new AddItemCommand
         (
             "ItemCode001",
             "ItemName001"
         );
-        var productId1 = await SendAsync(createItemCommand1);
+        var productId1 = await SendAsync(addItemCommand1);
 
-        var createItemCommand2 = new CreateItemCommand
+        var addItemCommand2 = new AddItemCommand
         (
             "ItemCode002",
             "ItemName002"
         );
-        var productId2 = await SendAsync(createItemCommand2);
+        var productId2 = await SendAsync(addItemCommand2);
 
 
         var createSalesOrderCommand = new AddSalesOrderCommand

@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DddEf.Application.UseCases.Customers.Commands
 {
-    public sealed class CreateItemCommandHandler (IDddEfContext applicationDbContext) : IRequestHandler<CreateCustomerCommand, CustomerId>
+    public sealed class AddItemCommandHandler (IDddEfContext applicationDbContext) : IRequestHandler<AddCustomerCommand, CustomerId>
     { 
-        public async Task<CustomerId> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<CustomerId> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = Customer.Create
             (

@@ -17,7 +17,7 @@ namespace DddEf.Api.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<ActionResult<ItemId>> Create(CreateItemCommand request)
+        public async Task<ActionResult<ItemId>> Create(AddItemCommand request)
         {  
             return await _sender.Send(request);
         }

@@ -2,9 +2,9 @@
 
 namespace DddEf.Application.UseCases.Items.Commands
 {
-    public class CreateItemCommandValidator : AbstractValidator<CreateItemCommand>
+    public class AddItemCommandValidator : AbstractValidator<AddItemCommand>
     {
-        public CreateItemCommandValidator()
+        public AddItemCommandValidator()
         {
             RuleFor(x=>x.ItemCode).NotEmpty();
             RuleFor(x=>x.ItemName).NotEmpty(); 

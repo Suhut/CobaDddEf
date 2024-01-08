@@ -2,9 +2,9 @@
 
 namespace DddEf.Application.UseCases.Customers.Commands
 {
-    public class CreateItemCommandValidator : AbstractValidator<CreateCustomerCommand>
+    public class AddItemCommandValidator : AbstractValidator<AddCustomerCommand>
     {
-        public CreateItemCommandValidator()
+        public AddItemCommandValidator()
         {
             RuleFor(x=>x.CustomerCode).NotEmpty();
             RuleFor(x=>x.CustomerName).NotEmpty(); 

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace DddEf.Application.UseCases.Customers.Commands;
 
-public record CreateCustomerCommand
+public record AddCustomerCommand
 (
     string CustomerCode,
     string CustomerName

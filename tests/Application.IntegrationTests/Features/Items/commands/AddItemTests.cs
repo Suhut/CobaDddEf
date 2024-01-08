@@ -8,13 +8,13 @@ namespace DddEf.Application.IntegrationTests.Features.Items.commands;
 
 using static Testing;
 
-public class CreateItemTests : BaseTestFixture
+public class AddItemTests : BaseTestFixture
 {
     [Test]
-    public async Task ShouldCreateItem()
+    public async Task ShouldAddItem()
     {
         // Arrange
-        var command = new CreateItemCommand
+        var command = new AddItemCommand
         (
             "Code001",
             "Name001"

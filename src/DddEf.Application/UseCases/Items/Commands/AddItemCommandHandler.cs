@@ -5,9 +5,9 @@ using MediatR;
 
 namespace DddEf.Application.UseCases.Items.Commands
 {
-    public sealed class CreateItemCommandHandler(IDddEfContext applicationDbContext) : IRequestHandler<CreateItemCommand, ItemId>
+    public sealed class AddItemCommandHandler(IDddEfContext applicationDbContext) : IRequestHandler<AddItemCommand, ItemId>
     { 
-        public async Task<ItemId> Handle(CreateItemCommand request, CancellationToken cancellationToken)
+        public async Task<ItemId> Handle(AddItemCommand request, CancellationToken cancellationToken)
         {
             var product = Item.Create
             (
