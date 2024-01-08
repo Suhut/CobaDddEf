@@ -1,5 +1,5 @@
 ﻿using DddEf.Domain.Aggregates.Customer;
-using DddEf.Domain.Aggregates.Product;
+using DddEf.Domain.Aggregates.Item;
 using DddEf.Domain.Aggregates.SalesOrder;
 using DddEf.Domain.Aggregates.SalesOrder.Entities;
 using MediatR;
@@ -10,7 +10,7 @@ namespace DddEf.Application.Common.Interfaces;
 public interface IDddEfContext
 {
     DbSet<Customer> Customers { get; set; }
-    DbSet<Product> Products { get; set; }
+    DbSet<Item> Items { get; set; }
     DbSet<SalesOrder> SalesOrders { get; set; }
     DbSet<SalesOrderItem> SalesOrderItems { get; set; }
     Task<TEntity> FindAsync<TEntity>(Guid? kayValue, CancellationToken cancellationToken) where TEntity : class;

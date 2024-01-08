@@ -1,5 +1,5 @@
 ﻿using DddEf.Application.UseCases.Customers.Commands;
-using DddEf.Application.UseCases.Products.Commands;
+using DddEf.Application.UseCases.Items.Commands;
 using DddEf.Application.UseCases.SalesOrders.Commands.Add;
 using DddEf.Application.UseCases.SalesOrders.Commands.Cancel; 
 using DddEf.Domain.Common.ValueObjects;
@@ -25,19 +25,19 @@ public class CancelSalesOrderTests : BaseTestFixture
 
         var customerId = await SendAsync(createCustomerCommand);
 
-        var createProductCommand1 = new CreateProductCommand
+        var createItemCommand1 = new CreateItemCommand
         (
-            "ProductCode001",
-            "ProductName001"
+            "ItemCode001",
+            "ItemName001"
         );
-        var productId1 = await SendAsync(createProductCommand1);
+        var productId1 = await SendAsync(createItemCommand1);
 
-        var createProductCommand2 = new CreateProductCommand
+        var createItemCommand2 = new CreateItemCommand
         (
-            "ProductCode002",
-            "ProductName002"
+            "ItemCode002",
+            "ItemName002"
         );
-        var productId2 = await SendAsync(createProductCommand2);
+        var productId2 = await SendAsync(createItemCommand2);
 
 
         var createSalesOrderCommand = new AddSalesOrderCommand

@@ -1,5 +1,5 @@
 ﻿using DddEf.Domain.Aggregates.Customer.ValueObjects;
-using DddEf.Domain.Aggregates.Product.ValueObjects;
+using DddEf.Domain.Aggregates.Item.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -122,10 +122,10 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
              
             sb.HasKey("DetId"); 
 
-            sb.Property(m => m.ProductId)
+            sb.Property(m => m.ItemId)
                .HasConversion(
                    productId => productId.Value,
-                   value => ProductId.Create(value)
+                   value => ItemId.Create(value)
                    )
                    ;
 

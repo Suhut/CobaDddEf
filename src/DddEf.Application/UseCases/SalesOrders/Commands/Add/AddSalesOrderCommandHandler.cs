@@ -19,7 +19,7 @@ namespace DddEf.Application.UseCases.SalesOrders.Commands.Add
              request.BillAddress,
              request.Items.ConvertAll(item => SalesOrderItem.Create(
                  rowNumber++,
-                 item.ProductId,
+                 item.ItemId,
                  item.Qty,
                  item.Price
                  )));

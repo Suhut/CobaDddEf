@@ -8,7 +8,7 @@ namespace DddEf.Application.IntegrationTests.Features.Customers.commands;
 
 using static Testing;
 
-public class CreateProductTests : BaseTestFixture
+public class CreateItemTests : BaseTestFixture
 {
     [Test]
     public async Task ShouldCreateCustomer()

@@ -28,19 +28,19 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tm_Product",
+                name: "Tm_Item",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    ItemCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ItemName = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     CreatedDateOffset = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     ModifiedDateOffset = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     VersionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tm_Product", x => x.Id);
+                    table.PrimaryKey("PK_Tm_Item", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,7 +73,7 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     DetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RowNumber = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Qty = table.Column<double>(type: "float", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true),
                     Total = table.Column<double>(type: "float", nullable: true),
@@ -104,7 +104,7 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                 name: "Tm_Customer");
 
             migrationBuilder.DropTable(
-                name: "Tm_Product");
+                name: "Tm_Item");
 
             migrationBuilder.DropTable(
                 name: "Tx_SalesOrder_Item");

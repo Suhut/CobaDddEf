@@ -1,5 +1,5 @@
 ﻿using DddEf.Domain.Aggregates.Customer.ValueObjects;
-using DddEf.Domain.Aggregates.Product.ValueObjects;
+using DddEf.Domain.Aggregates.Item.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using DddEf.Domain.Common.ValueObjects;
 using MediatR;
@@ -16,7 +16,7 @@ public record AddSalesOrderCommand
 ) : IRequest<SalesOrderId>;
 
 public record SalesOrderItemVm(
-    ProductId ProductId,
+    ItemId ItemId,
     double Qty,
     double Price
 );

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DddEf.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DddEfContext))]
-    [Migration("20240106105526_DddEfMigration")]
+    [Migration("20240108120147_DddEfMigration")]
     partial class DddEfMigration
     {
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.ToTable("Tm_Customer", (string)null);
                 });
 
-            modelBuilder.Entity("DddEf.Domain.Aggregates.Product.Product", b =>
+            modelBuilder.Entity("DddEf.Domain.Aggregates.Item.Item", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -64,18 +64,18 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset?>("CreatedDateOffset")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTimeOffset?>("ModifiedDateOffset")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("ProductCode")
+                    b.Property<string>("ItemCode")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("ProductName")
+                    b.Property<string>("ItemName")
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTimeOffset?>("ModifiedDateOffset")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<int>("_versionId")
                         .IsConcurrencyToken()
@@ -84,7 +84,7 @@ namespace DddEf.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tm_Product", (string)null);
+                    b.ToTable("Tm_Item", (string)null);
                 });
 
             modelBuilder.Entity("DddEf.Domain.Aggregates.SalesOrder.SalesOrder", b =>
@@ -136,15 +136,15 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uniqueidentifier");
 
+                            b1.Property<Guid>("ItemId")
+                                .HasColumnType("uniqueidentifier");
+
                             b1.Property<string>("LineStatus")
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<double?>("Price")
                                 .HasColumnType("float");
-
-                            b1.Property<Guid>("ProductId")
-                                .HasColumnType("uniqueidentifier");
 
                             b1.Property<double?>("Qty")
                                 .HasColumnType("float");

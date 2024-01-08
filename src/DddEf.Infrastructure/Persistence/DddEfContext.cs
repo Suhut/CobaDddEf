@@ -2,7 +2,7 @@
 using DddEf.Application.Common.Interfaces;
 using DddEf.Domain.Aggregates.Customer;
 using DddEf.Domain.Aggregates.Customer.ValueObjects;
-using DddEf.Domain.Aggregates.Product;
+using DddEf.Domain.Aggregates.Item;
 using DddEf.Domain.Aggregates.SalesOrder;
 using DddEf.Domain.Aggregates.SalesOrder.Entities;
 using DddEf.Domain.Common.Models;
@@ -26,7 +26,7 @@ namespace DddEf.Infrastructure.Persistence
         }
 
         public DbSet<Customer> Customers { get; set; } = null!;
-        public DbSet<Product> Products { get; set; } = null!;
+        public DbSet<Item> Items { get; set; } = null!;
         public DbSet<SalesOrder> SalesOrders { get; set; } = null!;
         public DbSet<SalesOrderItem> SalesOrderItems { get; set; } = null!;
 

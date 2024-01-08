@@ -4,8 +4,8 @@ POST {{DddEf.Api_HostAddress}}/api/products/Create
 Content-Type: application/json
 
 {
-  "ProductCode":"Code001",
-  "ProductName":"Name001"
+  "ItemCode":"Code001",
+  "ItemName":"Name001"
 }
 
 ###
