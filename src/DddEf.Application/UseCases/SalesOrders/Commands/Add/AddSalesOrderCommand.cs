@@ -9,14 +9,14 @@ public record AddSalesOrderCommand
 (
     string TransNo,
     DateTime TransDate,
-    CustomerId CustomerId,
+    Guid CustomerId,
     Address ShipAddress,
     Address BillAddress,
     List<SalesOrderItemVm> Items
-) : IRequest<SalesOrderId>;
+) : IRequest<Guid>;
 
 public record SalesOrderItemVm(
-    ItemId ItemId,
+    Guid ItemId,
     double Qty,
     double Price
 );

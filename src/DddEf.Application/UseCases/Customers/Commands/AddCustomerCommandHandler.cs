@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DddEf.Application.UseCases.Customers.Commands
 {
-    public sealed class AddItemCommandHandler (IDddEfContext applicationDbContext) : IRequestHandler<AddCustomerCommand, CustomerId>
+    public sealed class AddItemCommandHandler (IDddEfContext applicationDbContext) : IRequestHandler<AddCustomerCommand, Guid>
     { 
-        public async Task<CustomerId> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
         {
             var customer = Customer.Create
             (
@@ -22,7 +22,7 @@ namespace DddEf.Application.UseCases.Customers.Commands
             CustomerId[] arrs = { CustomerId.Create(customer.Id.Value), CustomerId.CreateUnique() };
 
             var customers = await applicationDbContext.Customers.Where(x => x.CustomerCode == request.CustomerCode && !arrs.Contains(x.Id)).ToListAsync(cancellationToken);
-            return customer.Id;
+            return customer.Id.Value;
         }
     }
 }

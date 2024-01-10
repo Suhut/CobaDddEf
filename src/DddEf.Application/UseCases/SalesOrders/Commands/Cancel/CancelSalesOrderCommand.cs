@@ -4,6 +4,6 @@ using MediatR;
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Cancel;
 public record CancelSalesOrderCommand
 ( 
-    SalesOrderId Id
+    Guid Id
 ) : IRequest<Guid>;
  

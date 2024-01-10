@@ -7,4 +7,4 @@ public record AddCustomerCommand
 (
     string CustomerCode,
     string CustomerName
-) : IRequest<CustomerId>;
+) : IRequest<Guid>;

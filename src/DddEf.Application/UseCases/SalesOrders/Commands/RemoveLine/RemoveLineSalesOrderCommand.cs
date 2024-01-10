@@ -4,6 +4,6 @@ using MediatR;
 namespace DddEf.Application.UseCases.SalesOrders.Commands.RemoveLine;
 public record RemoveLineSalesOrderCommand
 ( 
-    SalesOrderId Id
+    Guid Id
 ) : IRequest<Guid>;
  
