@@ -1,14 +1,12 @@
 ﻿using DddEf.Application.Common.Abstractions;
 using DddEf.Application.Common.Interfaces;
 using DddEf.Domain.Aggregates.Customer;
-using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using DddEf.Domain.Aggregates.Item;
 using DddEf.Domain.Aggregates.SalesOrder;
 using DddEf.Domain.Aggregates.SalesOrder.Entities;
 using DddEf.Domain.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Dynamic;
 using System.Reflection;
 
 namespace DddEf.Infrastructure.Persistence
@@ -32,29 +30,24 @@ namespace DddEf.Infrastructure.Persistence
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            var test123 = typeof(Customer).BaseType.Name; //"AggregateRoot`1";
-
-            var eventId = Guid.NewGuid(); 
-
-            foreach (var entry in ChangeTracker.Entries())
+        {  
+            foreach (var entry in ChangeTracker.Entries<AggregateRoot>()) 
             {
                 if (entry.Entity.GetType().BaseType.Name == "AggregateRoot`1")
-                {
-                    dynamic obj = (dynamic)entry.Entity;
+                { 
                     if ((entry.State == EntityState.Modified))
                     {
-                        obj.IncreaseVersion();
+                        entry.Entity.IncreaseVersion();
                     }
 
                     //last change
                     switch (entry.State)
                     {
                         case EntityState.Added:
-                            obj.SetCreatedDateOffset(_dateTimeProvider.Now);
+                            entry.Entity.SetCreatedDateOffset(_dateTimeProvider.Now);
                             break;
                         case EntityState.Modified:
-                            obj.SetModifiedDateOffset(_dateTimeProvider.Now);
+                            entry.Entity.SetModifiedDateOffset(_dateTimeProvider.Now);
                             break;
                     }
 

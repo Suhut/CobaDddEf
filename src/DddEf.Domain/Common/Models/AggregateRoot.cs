@@ -1,18 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DddEf.Domain.Common.Models;
-public abstract class AggregateRoot<TID> : Entity<TID> where TID : notnull
+public abstract class AggregateRoot
 {
 #pragma warning disable CS8618
     protected AggregateRoot()
     {
     }
 #pragma warning disable CS8618
-    public AggregateRoot(TID id) : base(id)
-    {
-    } 
-
+    
     private DateTimeOffset? CreatedDateOffset { get; set; }
     private DateTimeOffset? ModifiedDateOffset { get; set; }
 

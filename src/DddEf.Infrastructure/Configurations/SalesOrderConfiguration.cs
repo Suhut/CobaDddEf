@@ -26,7 +26,7 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
             .ValueGeneratedNever()
             .HasConversion(
                 id => id.Value,
-                value => SalesOrderId.Create(value)
+                value => new SalesOrderId(value)
                 )
                 ;
 
@@ -34,7 +34,7 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
         builder.Property(m => m.CustomerId)
            .HasConversion(
                id => id.Value,
-               value => CustomerId.Create(value)
+               value => new CustomerId(value)
                )
                ;
 
@@ -125,7 +125,7 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
             sb.Property(m => m.ItemId)
                .HasConversion(
                    productId => productId.Value,
-                   value => ItemId.Create(value)
+                   value => new ItemId(value)
                    )
                    ;
 

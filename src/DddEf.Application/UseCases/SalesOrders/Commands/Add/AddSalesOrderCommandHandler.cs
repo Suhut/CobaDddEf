@@ -1,4 +1,5 @@
 ﻿using DddEf.Application.Common.Interfaces;
+using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using DddEf.Domain.Aggregates.Item.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder;
 using DddEf.Domain.Aggregates.SalesOrder.Entities;
@@ -14,12 +15,12 @@ namespace DddEf.Application.UseCases.SalesOrders.Commands.Add
             var salesOrder = SalesOrder.Create(
              request.TransNo,
              request.TransDate,
-             request.CustomerId,
+             new CustomerId(request.CustomerId),
              request.ShipAddress,
              request.BillAddress,
              request.Items.ConvertAll(item => SalesOrderItem.Create(
                  rowNumber++,
-                 ItemId.Create(item.ItemId),
+                 new ItemId(item.ItemId),
                  item.Qty,
                  item.Price
                  )));

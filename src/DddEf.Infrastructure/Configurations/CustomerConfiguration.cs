@@ -20,7 +20,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .ValueGeneratedNever()
             .HasConversion(
                 id => id.Value,
-                value => CustomerId.Create(value)
+                value => new CustomerId(value)
                 )
                 ;
 

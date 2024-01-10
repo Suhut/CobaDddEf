@@ -20,7 +20,7 @@ public class ItemConfiguration : IEntityTypeConfiguration<Item>
             .ValueGeneratedNever()
             .HasConversion(
                 id => id.Value,
-                value => ItemId.Create(value)
+                value => new ItemId(value)
                 )
                 ;
 
