@@ -43,10 +43,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ModifiedDateOffset")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("_versionId")
+                    b.Property<int>("VersionId")
                         .IsConcurrencyToken()
-                        .HasColumnType("int")
-                        .HasColumnName("VersionId");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -74,10 +73,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ModifiedDateOffset")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("_versionId")
+                    b.Property<int>("VersionId")
                         .IsConcurrencyToken()
-                        .HasColumnType("int")
-                        .HasColumnName("VersionId");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -112,10 +110,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("_versionId")
+                    b.Property<int>("VersionId")
                         .IsConcurrencyToken()
-                        .HasColumnType("int")
-                        .HasColumnName("VersionId");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

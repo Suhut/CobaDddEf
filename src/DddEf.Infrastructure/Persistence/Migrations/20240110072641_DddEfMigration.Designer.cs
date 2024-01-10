@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DddEf.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DddEfContext))]
-    [Migration("20240110023018_DddEfMigration")]
+    [Migration("20240110072641_DddEfMigration")]
     partial class DddEfMigration
     {
         /// <inheritdoc />
@@ -46,10 +46,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ModifiedDateOffset")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("_versionId")
+                    b.Property<int>("VersionId")
                         .IsConcurrencyToken()
-                        .HasColumnType("int")
-                        .HasColumnName("VersionId");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -77,10 +76,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset?>("ModifiedDateOffset")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("_versionId")
+                    b.Property<int>("VersionId")
                         .IsConcurrencyToken()
-                        .HasColumnType("int")
-                        .HasColumnName("VersionId");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -115,10 +113,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("_versionId")
+                    b.Property<int>("VersionId")
                         .IsConcurrencyToken()
-                        .HasColumnType("int")
-                        .HasColumnName("VersionId");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

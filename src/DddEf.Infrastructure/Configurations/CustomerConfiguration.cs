@@ -1,14 +1,17 @@
 ﻿using DddEf.Domain.Aggregates.Customer;
 using DddEf.Domain.Aggregates.Customer.ValueObjects;
+using DddEf.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DddEf.Infrastructure.Configurations;
 
-public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
-{ 
-    public void Configure(EntityTypeBuilder<Customer> builder)
+public class CustomerConfiguration : AggregateRootConfiguration<Customer> 
+{
+    public override void Configure(EntityTypeBuilder<Customer> builder)
     {
+        base.Configure(builder);
+
         ConfigurationCustomersTable(builder);
     }
 
@@ -28,17 +31,7 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .HasMaxLength(50);
 
         builder.Property(m => m.CustomerName)
-            .HasMaxLength(300);
-
-
-        //builder.Metadata.FindNavigation(nameof(Customer))!
-        //    .SetPropertyAccessMode(PropertyAccessMode.Field)
-        //    ;
-
-
-        builder.Property("CreatedDateOffset"); 
-
-        builder.Property("ModifiedDateOffset");
+            .HasMaxLength(300); 
 
     }
 }

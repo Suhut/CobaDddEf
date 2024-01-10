@@ -1,14 +1,16 @@
 ﻿using DddEf.Domain.Aggregates.Item;
 using DddEf.Domain.Aggregates.Item.ValueObjects;
+using DddEf.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DddEf.Infrastructure.Configurations;
 
-public class ItemConfiguration : IEntityTypeConfiguration<Item>
+public class ItemConfiguration : AggregateRootConfiguration<Item>
 { 
-    public void Configure(EntityTypeBuilder<Item> builder)
+    public override void Configure(EntityTypeBuilder<Item> builder)
     {
+        base.Configure(builder);
         ConfigurationItemsTable(builder);
     }
 
@@ -28,16 +30,7 @@ public class ItemConfiguration : IEntityTypeConfiguration<Item>
             .HasMaxLength(50);
 
         builder.Property(m => m.ItemName)
-            .HasMaxLength(300);
-
-
-        //builder.Metadata.FindNavigation(nameof(Item))!
-        //    .SetPropertyAccessMode(PropertyAccessMode.Field)
-        //    ;
-
-        builder.Property("CreatedDateOffset");
-
-        builder.Property("ModifiedDateOffset");
+            .HasMaxLength(300); 
 
     }
 }

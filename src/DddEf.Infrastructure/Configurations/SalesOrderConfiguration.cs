@@ -2,15 +2,17 @@
 using DddEf.Domain.Aggregates.Item.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
+using DddEf.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DddEf.Infrastructure.Configurations;
 
-public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
+public class SalesOrderConfiguration : AggregateRootConfiguration<SalesOrder>
 {
-    public void Configure(EntityTypeBuilder<SalesOrder> builder)
+    public override void Configure(EntityTypeBuilder<SalesOrder> builder)
     {
+        base.Configure(builder);
         ConfigurationSalesOrdersTable(builder); 
         ConfigurationSalesOrderItemsTable(builder);
     }

@@ -55,12 +55,16 @@ public sealed class SalesOrder : AggregateRoot
     }
 
     public void Cancel()
-    { 
+    {
+        ArgumentNullException.ThrowIfNull(Id);
+
         Status = "Cancelled"; 
     }
 
     public void Close()
     {
+        ArgumentNullException.ThrowIfNull(Id);
+
         Status = "Closed";
         foreach(SalesOrderItem item in _items)
         {
@@ -70,6 +74,8 @@ public sealed class SalesOrder : AggregateRoot
 
     public void RemoveLine()
     {
+        ArgumentNullException.ThrowIfNull(Id);
+
         var item= _items.OrderBy(p=>p.RowNumber).FirstOrDefault();
         _items.Remove(item);  
     }

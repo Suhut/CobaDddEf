@@ -30,28 +30,26 @@ namespace DddEf.Infrastructure.Persistence
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {  
-            foreach (var entry in ChangeTracker.Entries<AggregateRoot>()) 
+        {
+            foreach (var entry in ChangeTracker.Entries<AggregateRoot>())
             {
-                if (entry.Entity.GetType().BaseType.Name == "AggregateRoot`1")
-                { 
-                    if ((entry.State == EntityState.Modified))
-                    {
-                        entry.Entity.IncreaseVersion();
-                    }
-
-                    //last change
-                    switch (entry.State)
-                    {
-                        case EntityState.Added:
-                            entry.Entity.SetCreatedDateOffset(_dateTimeProvider.Now);
-                            break;
-                        case EntityState.Modified:
-                            entry.Entity.SetModifiedDateOffset(_dateTimeProvider.Now);
-                            break;
-                    }
-
+                if ((entry.State == EntityState.Modified))
+                {
+                    entry.Entity.IncreaseVersion();
                 }
+
+                //last change
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.SetCreatedDateOffset(_dateTimeProvider.Now);
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.SetModifiedDateOffset(_dateTimeProvider.Now);
+                        break;
+                }
+
+
             }
             try
             {
