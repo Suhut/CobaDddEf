@@ -15,8 +15,7 @@ public abstract class AggregateRoot
     {
         ModifiedDateOffset = dt; 
     }
-
-    [ConcurrencyCheck] 
+     
     private int VersionId { get; set; } 
     public void IncreaseVersion()
     {

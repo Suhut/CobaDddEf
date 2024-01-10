@@ -10,7 +10,7 @@ public class AggregateRootConfiguration<T> : IEntityTypeConfiguration<T> where T
     { 
         builder.Property("CreatedDateOffset");
         builder.Property("ModifiedDateOffset");
-        builder.Property("VersionId");
+        builder.Property("VersionId").IsConcurrencyToken();
 
     } 
 }

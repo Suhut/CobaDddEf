@@ -41,7 +41,7 @@ namespace DddEf.Infrastructure.Persistence
                 //last change
                 switch (entry.State)
                 {
-                    case EntityState.Added:
+                    case EntityState.Added: 
                         entry.Entity.SetCreatedDateOffset(_dateTimeProvider.Now);
                         break;
                     case EntityState.Modified:
