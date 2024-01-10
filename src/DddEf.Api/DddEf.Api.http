@@ -1,6 +1,6 @@
 ﻿@DddEf.Api_HostAddress = https://localhost:7229
 
-POST {{DddEf.Api_HostAddress}}/api/products/Create
+POST {{DddEf.Api_HostAddress}}/api/items/Create
 Content-Type: application/json
 
 {

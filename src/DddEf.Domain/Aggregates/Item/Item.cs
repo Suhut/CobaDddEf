@@ -17,15 +17,15 @@ public sealed class Item : AggregateRoot
 
 #pragma warning disable CS8618
 
-    private Item(ItemId id, string productCode, string productName) 
+    private Item(ItemId id, string itemCode, string itemName) 
     {
         Id = id;
-        ItemCode = productCode;
-        ItemName = productName;
+        ItemCode = itemCode;
+        ItemName = itemName;
     }
 
-    public static Item Create(string productCode, string productName)
+    public static Item Create(string itemCode, string itemName)
     {
-        return new(new ItemId(Guid.NewGuid()), productCode, productName);
+        return new(new ItemId(Guid.NewGuid()), itemCode, itemName);
     }
 }

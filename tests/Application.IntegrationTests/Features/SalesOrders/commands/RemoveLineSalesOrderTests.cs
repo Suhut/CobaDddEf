@@ -3,6 +3,7 @@ using DddEf.Application.UseCases.Items.Commands;
 using DddEf.Application.UseCases.SalesOrders.Commands.Add;
 using DddEf.Application.UseCases.SalesOrders.Commands.RemoveLine;
 using DddEf.Domain.Aggregates.SalesOrder;
+using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using DddEf.Domain.Common.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
@@ -30,14 +31,14 @@ public class RemoveLineSalesOrderTests : BaseTestFixture
             "ItemCode001",
             "ItemName001"
         );
-        var productId1 = await SendAsync(addItemCommand1);
+        var itemId1 = await SendAsync(addItemCommand1);
 
         var addItemCommand2 = new AddItemCommand
         (
             "ItemCode002",
             "ItemName002"
         );
-        var productId2 = await SendAsync(addItemCommand2);
+        var itemId2 = await SendAsync(addItemCommand2);
 
 
         var createSalesOrderCommand = new AddSalesOrderCommand
@@ -49,8 +50,8 @@ public class RemoveLineSalesOrderTests : BaseTestFixture
             new Address("Jakarta", "Indonesia"),
             new List<SalesOrderItemVm>
             {
-                new SalesOrderItemVm(productId1,1,1000),
-                new SalesOrderItemVm(productId2,2,2000)
+                new SalesOrderItemVm(itemId1,1,1000),
+                new SalesOrderItemVm(itemId2,2,2000)
             }
         );
 
@@ -69,7 +70,7 @@ public class RemoveLineSalesOrderTests : BaseTestFixture
 
 
         // Assert
-        var salesOrder = await FindAsync<SalesOrder>(salesOrderId);
+        var salesOrder = await FindAsync<SalesOrder>(new SalesOrderId(salesOrderId));
 
         salesOrder.Should().NotBeNull();
     }

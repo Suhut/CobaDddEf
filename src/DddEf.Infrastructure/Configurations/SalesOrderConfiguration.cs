@@ -124,7 +124,7 @@ public class SalesOrderConfiguration : IEntityTypeConfiguration<SalesOrder>
 
             sb.Property(m => m.ItemId)
                .HasConversion(
-                   productId => productId.Value,
+                   itemId => itemId.Value,
                    value => new ItemId(value)
                    )
                    ;

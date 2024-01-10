@@ -21,13 +21,13 @@ public class AddItemTests : BaseTestFixture
         );
 
         // Act
-        var productId = await SendAsync(command);
+        var itemId = await SendAsync(command);
 
         // Assert
-        var product = await FindAsync<Item>(productId);
+        var item = await FindAsync<Item>(new ItemId(itemId));
 
-        product.Should().NotBeNull();
-        product!.ItemCode.Should().Be(command.ItemCode);
-        product.ItemName.Should().Be(command.ItemName);
+        item.Should().NotBeNull();
+        item!.ItemCode.Should().Be(command.ItemCode);
+        item.ItemName.Should().Be(command.ItemName);
     }
 }

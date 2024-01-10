@@ -6,6 +6,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using DddEf.Domain.Aggregates.SalesOrder;
+using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 
 namespace DddEf.Application.IntegrationTests.Features.SalesOrders;
 
@@ -30,14 +31,14 @@ public class ConcurrencyTransactionTest : BaseTestFixture
             "ItemCode001",
             "ItemName001"
         );
-        var productId1 = await SendAsync(addItemCommand1);
+        var itemId1 = await SendAsync(addItemCommand1);
 
         var addItemCommand2 = new AddItemCommand
         (
             "ItemCode002",
             "ItemName002"
         );
-        var productId2 = await SendAsync(addItemCommand2);
+        var itemId2 = await SendAsync(addItemCommand2);
 
 
         var createSalesOrderCommand = new AddSalesOrderCommand
@@ -49,8 +50,8 @@ public class ConcurrencyTransactionTest : BaseTestFixture
             new Address("Jakarta", "Indonesia"),
             new List<SalesOrderItemVm>
             {
-                new SalesOrderItemVm(productId1,1,1000),
-                new SalesOrderItemVm(productId2,2,2000)
+                new SalesOrderItemVm(itemId1,1,1000),
+                new SalesOrderItemVm(itemId2,2,2000)
             }
         );
 
@@ -59,8 +60,8 @@ public class ConcurrencyTransactionTest : BaseTestFixture
         var salesOrderId = await SendAsync(createSalesOrderCommand);
 
 
-        var entity1 = await FindAsync<SalesOrder>(salesOrderId);
-        var entity2 = await FindAsync<SalesOrder>(salesOrderId);
+        var entity1 = await FindAsync<SalesOrder>(new SalesOrderId(salesOrderId));
+        var entity2 = await FindAsync<SalesOrder>(new SalesOrderId(salesOrderId));
 
 
         entity1.Close();

@@ -1,21 +1,21 @@
 ﻿using DddEf.Application.Common.Interfaces;
+using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using MediatR;
 
-namespace DddEf.Application.UseCases.SalesOrders.Commands.Close
+namespace DddEf.Application.UseCases.SalesOrders.Commands.Close;
+
+public sealed class CloseSalesOrderCommandHandler(IDddEfContext dddEfContext) : IRequestHandler<CloseSalesOrderCommand, Guid>
 {
-    public sealed class CloseSalesOrderCommandHandler(IDddEfContext applicationDbContext) : IRequestHandler<CloseSalesOrderCommand, Guid>
+    public async Task<Guid> Handle(CloseSalesOrderCommand request, CancellationToken cancellationToken)
     {
-        public async Task<Guid> Handle(CloseSalesOrderCommand request, CancellationToken cancellationToken)
-        {
-            var salesOrder = await applicationDbContext.SalesOrders.FindAsync(new object[] { request.Id }, cancellationToken);
+        var salesOrder = await dddEfContext.SalesOrders.FindAsync(new object[] { new SalesOrderId(request.Id) }, cancellationToken);
 
-            ArgumentNullException.ThrowIfNull(salesOrder);
+        ArgumentNullException.ThrowIfNull(salesOrder);
 
-            salesOrder.Close();
-            applicationDbContext.SalesOrders.Update(salesOrder);
-            await applicationDbContext.SaveChangesAsync(cancellationToken);
+        salesOrder.Close();
+        //dddEfContext.SalesOrders.Update(salesOrder);
+        await dddEfContext.SaveChangesAsync(cancellationToken);
 
-            return salesOrder.Id.Value;
-        }
+        return salesOrder.Id.Value;
     }
 }

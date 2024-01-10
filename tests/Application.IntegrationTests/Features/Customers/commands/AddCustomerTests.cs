@@ -21,10 +21,10 @@ public class AddItemTests : BaseTestFixture
         );
 
         // Act
-        var customerId = await SendAsync(command);
+        var customerId = await SendAsync(command); 
 
         // Assert
-        var customer = await FindAsync<Customer>(customerId);
+        var customer = await FindAsync<Customer>(new CustomerId(customerId));
 
         customer.Should().NotBeNull();
         customer!.CustomerCode.Should().Be(command.CustomerCode);

@@ -8,12 +8,12 @@
 //{
 //    public Guid Id { get; set; }
 //}
-//public class GetSalesOrderByIdQueryHandler(IDddEfContext applicationDbContext) : IRequestHandler<GetSalesOrderByIdQuery, SalesOrder>
+//public class GetSalesOrderByIdQueryHandler(IDddEfContext dddEfContext) : IRequestHandler<GetSalesOrderByIdQuery, SalesOrder>
 //{  
 //    public async Task<SalesOrder> Handle(GetSalesOrderByIdQuery request, CancellationToken cancellationToken)
 //    {
 
-//        var result = await applicationDbContext.SalesOrders.FindAsync(new object[] { request.Id }, cancellationToken);
+//        var result = await dddEfContext.SalesOrders.FindAsync(new object[] { request.Id }, cancellationToken);
 
 //        return result;
 //    }

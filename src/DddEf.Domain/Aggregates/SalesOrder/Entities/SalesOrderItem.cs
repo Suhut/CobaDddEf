@@ -24,14 +24,14 @@ public sealed class SalesOrderItem
 
     public SalesOrderItem( 
                         int rowNumber,
-                        ItemId productId,
+                        ItemId itemId,
                        double qty,
                        double price
        ) 
     {
         DetId = Guid.NewGuid();
         RowNumber = rowNumber;
-        ItemId = productId;
+        ItemId = itemId;
         Qty = qty;
         Price = price;
         Total = qty * price;
@@ -39,11 +39,11 @@ public sealed class SalesOrderItem
     }
     public static SalesOrderItem Create(
                         int rowNumber,
-                        ItemId productId,
+                        ItemId itemId,
                        double qty,
                        double price)
     { 
-        return new( rowNumber, productId, qty, price);
+        return new( rowNumber, itemId, qty, price);
     }
 
     public void Close()

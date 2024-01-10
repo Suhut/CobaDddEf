@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
 
-namespace DddEf.Application.UseCases.SalesOrders.Commands.Cancel
+namespace DddEf.Application.UseCases.SalesOrders.Commands.Cancel;
+
+public class CancelSalesOrderCommandValidator : AbstractValidator<CancelSalesOrderCommand>
 {
-    public class CancelSalesOrderCommandValidator : AbstractValidator<CancelSalesOrderCommand>
+    public CancelSalesOrderCommandValidator()
     {
-        public CancelSalesOrderCommandValidator()
-        {
-            RuleFor(x => x.Id).NotEmpty(); 
-        }
+        RuleFor(x => x.Id).NotEmpty(); 
     }
 }
