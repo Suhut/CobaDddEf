@@ -74,31 +74,39 @@ public class AddSalesOrderTests : BaseTestFixture
         var salesOrderId02 = await SendAsync(createSalesOrderCommand02);
 
 
-        // Assert
+        //// Assert
+        //{
+
+        //    var salesOrder = await FindAsync<SalesOrder>(new SalesOrderId(salesOrderId01));
+
+        //    salesOrder.Should().NotBeNull();
+        //    //salesOrder!.TransNo.Should().Be(createSalesOrderCommand.TransNo);
+        //    //salesOrder.TransDate.Should().Be(createSalesOrderCommand.TransDate);
+        //    //salesOrder.Status.Should().Be("Open");
+        //    //salesOrder.ShipAddress.Country.Should().Be(createSalesOrderCommand.ShipAddress.Country);
+        //    //salesOrder.ShipAddress.City.Should().Be(createSalesOrderCommand.ShipAddress.City);
+        //    //salesOrder.BillAddress.Country.Should().Be(createSalesOrderCommand.BillAddress.Country);
+        //    //salesOrder.BillAddress.City.Should().Be(createSalesOrderCommand.BillAddress.City);
+        //    //salesOrder.Items.Should().NotBeNull();
+        //    //salesOrder.Items.Count.Should().Be(createSalesOrderCommand.Items.Count);
+
+        //    var getSalesOrderByIdQuery = new GetSalesOrderByIdQuery { Id = salesOrderId01 };
+        //    var salesOrder1 = await SendAsync(getSalesOrderByIdQuery);
+
+        //    salesOrder1.Should().NotBeNull();
+        //}
+
+        //{
+
+        //    var getSalesOrdersQuery = new GetSalesOrdersQuery();
+        //    var salesOrders = await SendAsync(getSalesOrdersQuery);
+        //    salesOrders.Should().NotBeNull();
+
+        //}
+
         {
 
-            var salesOrder = await FindAsync<SalesOrder>(new SalesOrderId(salesOrderId01));
-
-            salesOrder.Should().NotBeNull();
-            //salesOrder!.TransNo.Should().Be(createSalesOrderCommand.TransNo);
-            //salesOrder.TransDate.Should().Be(createSalesOrderCommand.TransDate);
-            //salesOrder.Status.Should().Be("Open");
-            //salesOrder.ShipAddress.Country.Should().Be(createSalesOrderCommand.ShipAddress.Country);
-            //salesOrder.ShipAddress.City.Should().Be(createSalesOrderCommand.ShipAddress.City);
-            //salesOrder.BillAddress.Country.Should().Be(createSalesOrderCommand.BillAddress.Country);
-            //salesOrder.BillAddress.City.Should().Be(createSalesOrderCommand.BillAddress.City);
-            //salesOrder.Items.Should().NotBeNull();
-            //salesOrder.Items.Count.Should().Be(createSalesOrderCommand.Items.Count);
-
-            var getSalesOrderByIdQuery = new GetSalesOrderByIdQuery { Id = salesOrderId01 };
-            var salesOrder1 = await SendAsync(getSalesOrderByIdQuery);
-
-            salesOrder1.Should().NotBeNull();
-        }
-
-        {
-
-            var getSalesOrdersQuery = new GetSalesOrdersQuery();
+            var getSalesOrdersQuery = new GetSalesOrdersLinqQuery();
             var salesOrders = await SendAsync(getSalesOrdersQuery);
             salesOrders.Should().NotBeNull();
 

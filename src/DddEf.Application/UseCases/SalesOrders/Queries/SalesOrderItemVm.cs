@@ -6,7 +6,7 @@ public class SalesOrderItemVm
     public Guid? ItemId { get; set; }
     public string ItemCode { get; set; }
     public string ItemName { get; set; }
-    public decimal? Qty { get; set; }
-    public decimal? Price { get; set; }
-    public decimal? Total { get; set; }
+    public double? Qty { get; set; }
+    public double? Price { get; set; }
+    public double? Total { get; set; }
 }

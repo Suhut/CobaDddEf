@@ -11,8 +11,7 @@ public interface IDddEfContext
 {
     DbSet<Customer> Customers { get; set; }
     DbSet<Item> Items { get; set; }
-    DbSet<SalesOrder> SalesOrders { get; set; }
-    DbSet<SalesOrderItem> SalesOrderItems { get; set; }
+    DbSet<SalesOrder> SalesOrders { get; set; } 
     Task<TEntity> FindAsync<TEntity>(Guid? kayValue, CancellationToken cancellationToken) where TEntity : class;
     Task<Unit> ExecuteRawSql(string ssql, CancellationToken cancellationToken);
     Task<Unit> ExecuteRawSql(string ssql, object param, CancellationToken cancellationToken);

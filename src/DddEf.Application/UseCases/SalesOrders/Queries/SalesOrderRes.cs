@@ -11,7 +11,7 @@ public class SalesOrderRes
     public Guid? CustomerId { set; get; }
     public string CustomerCode { set; get; }
     public string CustomerName { set; get; }
-    public decimal? Total { set; get; }
+    public double? Total { set; get; }
     public Address ShipAddress { set; get; } 
     public Address BillAddress { set; get; }
     public List<SalesOrderItemVm> Items { set; get; } = [];

@@ -81,5 +81,5 @@ file class TempSalesOrderVm
     public string ShipAddress_Country { set; get; }
     public string BillAddress_City { set; get; }
     public string BillAddress_Country { set; get; }
-    public decimal? Total { set; get; }
+    public double? Total { set; get; }
 }
