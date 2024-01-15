@@ -48,10 +48,10 @@ public class CancelSalesOrderTests : BaseTestFixture
             customerId,
             new Address("Blora", "Indonesia"),
             new Address("Jakarta", "Indonesia"),
-            new List<SalesOrderItemVm>
+            new List<AddSalesOrderItemVm>
             {
-                new SalesOrderItemVm(itemId1,1,1000),
-                new SalesOrderItemVm(itemId2,2,2000)
+                new AddSalesOrderItemVm(itemId1,1,1000),
+                new AddSalesOrderItemVm(itemId2,2,2000)
             }
         );
 

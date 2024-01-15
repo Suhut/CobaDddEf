@@ -1,5 +1,6 @@
 ﻿using DddEf.Application.Common.Abstractions;
 using DddEf.Application.Common.Interfaces;
+using DddEf.Infrastructure.Dapper;
 using DddEf.Infrastructure.Persistence;
 using DddEf.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ public static class ConfigureServices
 
         services.AddScoped<IDddEfContext>(provider => provider.GetService<DddEfContext>());
         services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+        services.AddSqlDapperClient(connectionString);
 
 
         return services;

@@ -31,6 +31,7 @@ namespace DddEf.Infrastructure.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
+
             foreach (var entry in ChangeTracker.Entries<AggregateRoot>())
             {
                 if ((entry.State == EntityState.Modified))
