@@ -53,7 +53,8 @@ public class CloseSalesOrderTests : BaseTestFixture
             {
                 new AddSalesOrderItemVm(itemId1,1,1000),
                 new AddSalesOrderItemVm(itemId2,2,2000)
-            }
+            },
+            []
         );
 
 

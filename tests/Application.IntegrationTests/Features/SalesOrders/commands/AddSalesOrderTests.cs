@@ -40,6 +40,27 @@ public class AddSalesOrderTests : BaseTestFixture
         );
         var itemId2 = await SendAsync(addItemCommand2);
 
+        var addItemCommand3 = new AddItemCommand
+        (
+            "ItemCode003",
+            "ItemName003"
+        );
+        var itemId3 = await SendAsync(addItemCommand3);
+
+        var addItemCommand4 = new AddItemCommand
+        (
+            "ItemCode004",
+            "ItemName004"
+        );
+        var itemId4 = await SendAsync(addItemCommand4);
+
+        var addItemCommand5 = new AddItemCommand
+        (
+            "ItemCode005",
+            "ItemName005"
+        );
+        var itemId5 = await SendAsync(addItemCommand5);
+
 
         var createSalesOrderCommand01 = new AddSalesOrderCommand
         (
@@ -52,21 +73,34 @@ public class AddSalesOrderTests : BaseTestFixture
             {
                 new AddSalesOrderItemVm(itemId1,1,1000),
                 new AddSalesOrderItemVm(itemId2,2,2000)
+            },
+            new List<AddSalesOrderItemSecondVm>
+            {
+                new AddSalesOrderItemSecondVm(itemId3,3,3000),
+                new AddSalesOrderItemSecondVm(itemId4,4,4000),
+                new AddSalesOrderItemSecondVm(itemId5,5,5000)
             }
         );
+
         var createSalesOrderCommand02 = new AddSalesOrderCommand
-      (
-          "Trans002",
-          DateTime.Now.Date,
-          customerId,
-          new Address("Blora", "Indonesia"),
-          new Address("Jakarta", "Indonesia"),
-          new List<AddSalesOrderItemVm>
-          {
-                new AddSalesOrderItemVm(itemId1,1,1000),
-                new AddSalesOrderItemVm(itemId2,2,2000)
-          }
-      );
+                (
+                    "Trans001",
+                    DateTime.Now.Date,
+                    customerId,
+                    new Address("Blora", "Indonesia"),
+                    new Address("Jakarta", "Indonesia"),
+                    new List<AddSalesOrderItemVm>
+                    {
+                new AddSalesOrderItemVm(itemId1,5,5000),
+                new AddSalesOrderItemVm(itemId2,4,4000)
+                    },
+                    new List<AddSalesOrderItemSecondVm>
+                    {
+                new AddSalesOrderItemSecondVm(itemId3,3,3000),
+                new AddSalesOrderItemSecondVm(itemId4,2,2000),
+                new AddSalesOrderItemSecondVm(itemId5,1,1000)
+                    }
+                );
 
 
         // Act
@@ -106,7 +140,7 @@ public class AddSalesOrderTests : BaseTestFixture
 
         {
 
-            var getSalesOrdersQuery = new GetSalesOrdersLinqQuery { Id1= salesOrderId01, Id2 = salesOrderId02 };
+            var getSalesOrdersQuery = new GetSalesOrdersLinqQuery { DateFrom= DateTime.Now.Date, DateTo = DateTime.Now.Date };
             var salesOrders = await SendAsync(getSalesOrdersQuery);
             salesOrders.Should().NotBeNull();
 

@@ -17,6 +17,9 @@ public sealed class SalesOrder : AggregateRoot
     public IReadOnlyList<SalesOrderItem> Items => (_items.OrderBy(p => p.RowNumber)).ToList().AsReadOnly();
 
     private readonly List<SalesOrderItem> _items = new();
+    public IReadOnlyList<SalesOrderItemSecond> ItemSeconds => (_itemSeconds.OrderBy(p => p.RowNumber)).ToList().AsReadOnly();
+
+    private readonly List<SalesOrderItemSecond> _itemSeconds = new();
     public double Total { get; private set; }
 
 
@@ -31,7 +34,8 @@ public sealed class SalesOrder : AggregateRoot
     private SalesOrder(SalesOrderId id, string transNo, DateTime transDate, CustomerId customerId,
         Address billAddress,
         Address shipAddress,
-        List<SalesOrderItem> items)
+        List<SalesOrderItem> items,
+        List<SalesOrderItemSecond> itemSeconds)
          
     { 
         Id = id;
@@ -42,16 +46,19 @@ public sealed class SalesOrder : AggregateRoot
         BillAddress = billAddress;
         ShipAddress = shipAddress;
         _items = items;
-        Total = items.Sum(p => p.Total ?? 0);
+        _itemSeconds = itemSeconds;
+        Total = items.Sum(p => p.Total ?? 0) + itemSeconds.Sum(p => p.Total ?? 0);
     }
 
 
     public static SalesOrder Create(string transNo, DateTime transDate, CustomerId customerId,
                                 Address billAddress,
                                 Address shipAddress,
-                              List<SalesOrderItem> items)
+                              List<SalesOrderItem> items,
+                              List<SalesOrderItemSecond> itemSeconds
+                              )
     {
-        return new(new SalesOrderId(Guid.NewGuid()), transNo, transDate, customerId, billAddress, shipAddress, items);
+        return new(new SalesOrderId(Guid.NewGuid()), transNo, transDate, customerId, billAddress, shipAddress, items, itemSeconds);
     }
 
     public void Cancel()

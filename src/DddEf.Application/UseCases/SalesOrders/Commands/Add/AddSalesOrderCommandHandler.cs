@@ -11,7 +11,8 @@ public sealed class AddSalesOrderCommandHandler(IDddEfContext dddEfContext) : IR
 {
     public async Task<Guid> Handle(AddSalesOrderCommand request, CancellationToken cancellationToken)
     {
-        var rowNumber = 1;
+        var rowNumberItem = 1;
+        var rowNumberItemSecond = 1;
         var salesOrder = SalesOrder.Create(
          request.TransNo,
          request.TransDate,
@@ -19,11 +20,18 @@ public sealed class AddSalesOrderCommandHandler(IDddEfContext dddEfContext) : IR
          request.ShipAddress,
          request.BillAddress,
          request.Items.ConvertAll(item => SalesOrderItem.Create(
-             rowNumber++,
+             rowNumberItem++,
              new ItemId(item.ItemId),
              item.Qty,
              item.Price
-             )));
+             )),
+         request.ItemSeconds.ConvertAll(item => SalesOrderItemSecond.Create(
+             rowNumberItemSecond++,
+             new ItemId(item.ItemId),
+             item.Qty,
+             item.Price
+             ))
+         );
 
         await dddEfContext.SalesOrders.AddAsync(salesOrder, cancellationToken);
         await dddEfContext.SaveChangesAsync(cancellationToken);

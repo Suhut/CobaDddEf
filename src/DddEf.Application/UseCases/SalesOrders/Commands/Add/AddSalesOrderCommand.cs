@@ -9,5 +9,6 @@ public record AddSalesOrderCommand
     Guid CustomerId,
     Address ShipAddress,
     Address BillAddress,
-    List<AddSalesOrderItemVm> Items
+    List<AddSalesOrderItemVm> Items,
+    List<AddSalesOrderItemSecondVm> ItemSeconds
 ) : IRequest<Guid>;

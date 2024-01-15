@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DddEf.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DddEfContext))]
-    [Migration("20240110223626_DddEfMigration")]
+    [Migration("20240115233030_DddEfMigration")]
     partial class DddEfMigration
     {
         /// <inheritdoc />
@@ -163,6 +163,45 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                                 .HasForeignKey("Id");
                         });
 
+                    b.OwnsMany("DddEf.Domain.Aggregates.SalesOrder.Entities.SalesOrderItemSecond", "ItemSeconds", b1 =>
+                        {
+                            b1.Property<Guid>("DetId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<Guid>("ItemId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("LineStatus")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<double?>("Price")
+                                .HasColumnType("float");
+
+                            b1.Property<double?>("Qty")
+                                .HasColumnType("float");
+
+                            b1.Property<int>("RowNumber")
+                                .HasColumnType("int");
+
+                            b1.Property<double?>("Total")
+                                .HasColumnType("float");
+
+                            b1.HasKey("DetId");
+
+                            b1.HasIndex("Id", "RowNumber")
+                                .IsUnique();
+
+                            b1.ToTable("Tx_SalesOrder_ItemSecond", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("Id");
+                        });
+
                     b.OwnsOne("DddEf.Domain.Common.ValueObjects.Address", "BillAddress", b1 =>
                         {
                             b1.Property<Guid>("SalesOrderId")
@@ -211,6 +250,8 @@ namespace DddEf.Infrastructure.Persistence.Migrations
 
                     b.Navigation("BillAddress")
                         .IsRequired();
+
+                    b.Navigation("ItemSeconds");
 
                     b.Navigation("Items");
 

@@ -90,9 +90,39 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Tx_SalesOrder_ItemSecond",
+                columns: table => new
+                {
+                    DetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RowNumber = table.Column<int>(type: "int", nullable: false),
+                    ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Qty = table.Column<double>(type: "float", nullable: true),
+                    Price = table.Column<double>(type: "float", nullable: true),
+                    Total = table.Column<double>(type: "float", nullable: true),
+                    LineStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tx_SalesOrder_ItemSecond", x => x.DetId);
+                    table.ForeignKey(
+                        name: "FK_Tx_SalesOrder_ItemSecond_Tx_SalesOrder_Id",
+                        column: x => x.Id,
+                        principalTable: "Tx_SalesOrder",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Tx_SalesOrder_Item_Id_RowNumber",
                 table: "Tx_SalesOrder_Item",
+                columns: new[] { "Id", "RowNumber" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tx_SalesOrder_ItemSecond_Id_RowNumber",
+                table: "Tx_SalesOrder_ItemSecond",
                 columns: new[] { "Id", "RowNumber" },
                 unique: true);
         }
@@ -108,6 +138,9 @@ namespace DddEf.Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tx_SalesOrder_Item");
+
+            migrationBuilder.DropTable(
+                name: "Tx_SalesOrder_ItemSecond");
 
             migrationBuilder.DropTable(
                 name: "Tx_SalesOrder");

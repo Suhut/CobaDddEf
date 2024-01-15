@@ -15,6 +15,7 @@ public class SalesOrderConfiguration : AggregateRootConfiguration<SalesOrder>
         base.Configure(builder);
         ConfigurationSalesOrdersTable(builder); 
         ConfigurationSalesOrderItemsTable(builder);
+        ConfigurationSalesOrderItemSecondsTable(builder);
     }
 
   
@@ -137,6 +138,34 @@ public class SalesOrderConfiguration : AggregateRootConfiguration<SalesOrder>
         builder.Navigation(s => s.Items).Metadata.SetField("_items");
         builder.Navigation(s => s.Items).UsePropertyAccessMode(PropertyAccessMode.Field);
         
+
+    }
+
+    private void ConfigurationSalesOrderItemSecondsTable(EntityTypeBuilder<SalesOrder> builder)
+    {
+        builder.OwnsMany(m => m.ItemSeconds, sb =>
+        {
+            sb.ToTable("Tx_SalesOrder_ItemSecond");
+
+            sb.WithOwner().HasForeignKey("Id");
+
+            sb.HasIndex("Id", "RowNumber").IsUnique();
+
+            sb.HasKey("DetId");
+
+            sb.Property(m => m.ItemId)
+               .HasConversion(
+                   itemId => itemId.Value,
+                   value => new ItemId(value)
+                   )
+                   ;
+
+        });
+
+
+        builder.Navigation(s => s.ItemSeconds).Metadata.SetField("_itemSeconds");
+        builder.Navigation(s => s.ItemSeconds).UsePropertyAccessMode(PropertyAccessMode.Field);
+
 
     }
 

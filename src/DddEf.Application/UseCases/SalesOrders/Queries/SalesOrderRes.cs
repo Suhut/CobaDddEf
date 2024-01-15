@@ -15,4 +15,5 @@ public class SalesOrderRes
     public Address ShipAddress { set; get; } 
     public Address BillAddress { set; get; }
     public List<SalesOrderItemVm> Items { set; get; } = [];
+    public List<SalesOrderItemSecondVm> ItemSeconds { set; get; } = [];
 }

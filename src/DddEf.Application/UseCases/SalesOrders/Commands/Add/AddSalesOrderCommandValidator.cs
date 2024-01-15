@@ -10,5 +10,6 @@ public class AddSalesOrderCommandValidator : AbstractValidator<AddSalesOrderComm
         RuleFor(x => x.TransDate).NotEmpty();
         RuleFor(x => x.CustomerId).NotEmpty();
         RuleFor(x => x.Items).NotEmpty();
+        RuleFor(x => x.ItemSeconds).NotEmpty();
     }
 }
