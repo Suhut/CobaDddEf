@@ -56,7 +56,7 @@ public class AddSalesOrderTests : BaseTestFixture
         );
         var createSalesOrderCommand02 = new AddSalesOrderCommand
       (
-          "Trans001",
+          "Trans002",
           DateTime.Now.Date,
           customerId,
           new Address("Blora", "Indonesia"),
@@ -106,7 +106,7 @@ public class AddSalesOrderTests : BaseTestFixture
 
         {
 
-            var getSalesOrdersQuery = new GetSalesOrdersLinqQuery();
+            var getSalesOrdersQuery = new GetSalesOrdersLinqQuery { Id1= salesOrderId01, Id2 = salesOrderId02 };
             var salesOrders = await SendAsync(getSalesOrdersQuery);
             salesOrders.Should().NotBeNull();
 
