@@ -23,13 +23,15 @@ public sealed class AddSalesOrderCommandHandler(IDddEfContext dddEfContext) : IR
              rowNumberItem++,
              new ItemId(item.ItemId),
              item.Qty,
-             item.Price
+             item.Price,
+             []
              )),
          request.ItemSeconds.ConvertAll(item => SalesOrderItemSecond.Create(
              rowNumberItemSecond++,
              new ItemId(item.ItemId),
              item.Qty,
-             item.Price
+             item.Price,
+             []
              ))
          );
 

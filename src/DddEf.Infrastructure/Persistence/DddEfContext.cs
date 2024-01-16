@@ -8,6 +8,7 @@ using DddEf.Domain.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace DddEf.Infrastructure.Persistence
 {
@@ -70,6 +71,7 @@ namespace DddEf.Infrastructure.Persistence
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(builder);
+           
         }
 
 

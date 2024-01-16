@@ -3,7 +3,7 @@ using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 
 namespace DddEf.Domain.Aggregates.SalesOrder.Entities;
 
-public sealed class SalesOrderItemSecond  
+public sealed class SalesOrderItemSecond
 {
     private Guid DetId { get; set; }
     private SalesOrderId Id { get; }
@@ -13,21 +13,25 @@ public sealed class SalesOrderItemSecond
     public double? Price { get; private set; }
     public double? Total { get; private set; }
     public string LineStatus { get; private set; }
+    public IReadOnlyList<SalesOrderItemSecondBin> Bins => (_bins.OrderBy(p => p.RowNumber)).ToList().AsReadOnly();
+
+    private readonly List<SalesOrderItemSecondBin> _bins = new();
 
 
 #pragma warning disable CS8618
     private SalesOrderItemSecond()
     {
-       
+
     }
 #pragma warning disable CS8618 
 
-    public SalesOrderItemSecond( 
+    public SalesOrderItemSecond(
                         int rowNumber,
                         ItemId itemId,
                        double qty,
-                       double price
-       ) 
+                       double price,
+                        List<SalesOrderItemSecondBin> bins
+       )
     {
         DetId = Guid.NewGuid();
         RowNumber = rowNumber;
@@ -36,14 +40,17 @@ public sealed class SalesOrderItemSecond
         Price = price;
         Total = qty * price;
         LineStatus = "Open";
+        _bins = bins;
     }
     public static SalesOrderItemSecond Create(
                         int rowNumber,
                         ItemId itemId,
                        double qty,
-                       double price)
-    { 
-        return new( rowNumber, itemId, qty, price);
+                       double price,
+                       List<SalesOrderItemSecondBin> bins
+                       )
+    {
+        return new(rowNumber, itemId, qty, price, bins);
     }
 
     public void Close()
@@ -51,4 +58,4 @@ public sealed class SalesOrderItemSecond
         LineStatus = "Closed";
     }
 }
- 
+

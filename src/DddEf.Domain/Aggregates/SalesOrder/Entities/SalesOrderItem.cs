@@ -13,6 +13,9 @@ public sealed class SalesOrderItem
     public double? Price { get; private set; }
     public double? Total { get; private set; }
     public string LineStatus { get; private set; }
+    public IReadOnlyList<SalesOrderItemBin> Bins => (_bins.OrderBy(p => p.RowNumber)).ToList().AsReadOnly();
+
+    private readonly List<SalesOrderItemBin> _bins = new();
 
 
 #pragma warning disable CS8618
@@ -26,7 +29,8 @@ public sealed class SalesOrderItem
                         int rowNumber,
                         ItemId itemId,
                        double qty,
-                       double price
+                       double price,
+                        List<SalesOrderItemBin> bins
        ) 
     {
         DetId = Guid.NewGuid();
@@ -36,14 +40,17 @@ public sealed class SalesOrderItem
         Price = price;
         Total = qty * price;
         LineStatus = "Open";
+        _bins = bins;
     }
     public static SalesOrderItem Create(
                         int rowNumber,
                         ItemId itemId,
                        double qty,
-                       double price)
+                       double price,
+                       List<SalesOrderItemBin> bins
+                       )
     { 
-        return new( rowNumber, itemId, qty, price);
+        return new( rowNumber, itemId, qty, price, bins);
     }
 
     public void Close()

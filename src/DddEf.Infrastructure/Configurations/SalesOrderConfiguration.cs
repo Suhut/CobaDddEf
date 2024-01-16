@@ -1,6 +1,7 @@
 ﻿using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using DddEf.Domain.Aggregates.Item.ValueObjects;
 using DddEf.Domain.Aggregates.SalesOrder;
+using DddEf.Domain.Aggregates.SalesOrder.Entities;
 using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using DddEf.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ namespace DddEf.Infrastructure.Configurations;
 public class SalesOrderConfiguration : AggregateRootConfiguration<SalesOrder>
 {
     public override void Configure(EntityTypeBuilder<SalesOrder> builder)
-    {
+    { 
         base.Configure(builder);
         ConfigurationSalesOrdersTable(builder); 
         ConfigurationSalesOrderItemsTable(builder);
@@ -115,7 +116,7 @@ public class SalesOrderConfiguration : AggregateRootConfiguration<SalesOrder>
 
     private void ConfigurationSalesOrderItemsTable(EntityTypeBuilder<SalesOrder> builder)
     {
-        builder.OwnsMany(m => m.Items, sb =>
+       builder.OwnsMany(m => m.Items, sb =>
         {
             sb.ToTable("Tx_SalesOrder_Item");
              
@@ -130,16 +131,40 @@ public class SalesOrderConfiguration : AggregateRootConfiguration<SalesOrder>
                    itemId => itemId.Value,
                    value => new ItemId(value)
                    )
-                   ;
+                   ; 
+
+            ConfigurationSalesOrderItemBinsTable(sb); 
 
         });
          
 
         builder.Navigation(s => s.Items).Metadata.SetField("_items");
         builder.Navigation(s => s.Items).UsePropertyAccessMode(PropertyAccessMode.Field);
-        
+
+         
 
     }
+
+    private void ConfigurationSalesOrderItemBinsTable(OwnedNavigationBuilder<SalesOrder, SalesOrderItem> builder)
+    {
+        builder.OwnsMany(m => m.Bins, sb =>
+        {
+            sb.ToTable("Tx_SalesOrder_Item_Bin");
+
+            sb.WithOwner().HasForeignKey("DetId");
+
+            sb.HasIndex("DetId", "RowNumber").IsUnique();
+
+            sb.HasKey("DetDetId");
+
+        });
+
+        builder.Navigation(s => s.Bins).Metadata.SetField("_bins");
+        builder.Navigation(s => s.Bins).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+
+    }
+
 
     private void ConfigurationSalesOrderItemSecondsTable(EntityTypeBuilder<SalesOrder> builder)
     {
@@ -160,11 +185,34 @@ public class SalesOrderConfiguration : AggregateRootConfiguration<SalesOrder>
                    )
                    ;
 
+
+            ConfigurationSalesOrderItemSecondBinsTable(sb);
         });
 
 
         builder.Navigation(s => s.ItemSeconds).Metadata.SetField("_itemSeconds");
         builder.Navigation(s => s.ItemSeconds).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+
+    }
+
+    private void ConfigurationSalesOrderItemSecondBinsTable(OwnedNavigationBuilder<SalesOrder, SalesOrderItemSecond> builder)
+    {
+        builder.OwnsMany(m => m.Bins, sb =>
+        {
+            sb.ToTable("Tx_SalesOrder_ItemSecond_Bin");
+
+            sb.WithOwner().HasForeignKey("DetId");
+
+            sb.HasIndex("DetId", "RowNumber").IsUnique();
+
+            sb.HasKey("DetDetId");
+             
+
+        });
+
+        builder.Navigation(s => s.Bins).Metadata.SetField("_bins");
+        builder.Navigation(s => s.Bins).UsePropertyAccessMode(PropertyAccessMode.Field);
 
 
     }

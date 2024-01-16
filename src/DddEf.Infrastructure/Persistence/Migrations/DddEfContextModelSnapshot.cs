@@ -158,6 +158,35 @@ namespace DddEf.Infrastructure.Persistence.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("Id");
+
+                            b1.OwnsMany("DddEf.Domain.Aggregates.SalesOrder.Entities.SalesOrderItemBin", "Bins", b2 =>
+                                {
+                                    b2.Property<Guid>("DetDetId")
+                                        .ValueGeneratedOnAdd()
+                                        .HasColumnType("uniqueidentifier");
+
+                                    b2.Property<string>("BinName")
+                                        .IsRequired()
+                                        .HasColumnType("nvarchar(max)");
+
+                                    b2.Property<Guid>("DetId")
+                                        .HasColumnType("uniqueidentifier");
+
+                                    b2.Property<int>("RowNumber")
+                                        .HasColumnType("int");
+
+                                    b2.HasKey("DetDetId");
+
+                                    b2.HasIndex("DetId", "RowNumber")
+                                        .IsUnique();
+
+                                    b2.ToTable("Tx_SalesOrder_Item_Bin", (string)null);
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("DetId");
+                                });
+
+                            b1.Navigation("Bins");
                         });
 
                     b.OwnsMany("DddEf.Domain.Aggregates.SalesOrder.Entities.SalesOrderItemSecond", "ItemSeconds", b1 =>
@@ -197,6 +226,35 @@ namespace DddEf.Infrastructure.Persistence.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("Id");
+
+                            b1.OwnsMany("DddEf.Domain.Aggregates.SalesOrder.Entities.SalesOrderItemSecondBin", "Bins", b2 =>
+                                {
+                                    b2.Property<Guid>("DetDetId")
+                                        .ValueGeneratedOnAdd()
+                                        .HasColumnType("uniqueidentifier");
+
+                                    b2.Property<string>("BinName")
+                                        .IsRequired()
+                                        .HasColumnType("nvarchar(max)");
+
+                                    b2.Property<Guid>("DetId")
+                                        .HasColumnType("uniqueidentifier");
+
+                                    b2.Property<int>("RowNumber")
+                                        .HasColumnType("int");
+
+                                    b2.HasKey("DetDetId");
+
+                                    b2.HasIndex("DetId", "RowNumber")
+                                        .IsUnique();
+
+                                    b2.ToTable("Tx_SalesOrder_ItemSecond_Bin", (string)null);
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("DetId");
+                                });
+
+                            b1.Navigation("Bins");
                         });
 
                     b.OwnsOne("DddEf.Domain.Common.ValueObjects.Address", "BillAddress", b1 =>

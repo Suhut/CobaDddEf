@@ -114,6 +114,46 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Tx_SalesOrder_Item_Bin",
+                columns: table => new
+                {
+                    DetDetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RowNumber = table.Column<int>(type: "int", nullable: false),
+                    BinName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tx_SalesOrder_Item_Bin", x => x.DetDetId);
+                    table.ForeignKey(
+                        name: "FK_Tx_SalesOrder_Item_Bin_Tx_SalesOrder_Item_DetId",
+                        column: x => x.DetId,
+                        principalTable: "Tx_SalesOrder_Item",
+                        principalColumn: "DetId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tx_SalesOrder_ItemSecond_Bin",
+                columns: table => new
+                {
+                    DetDetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DetId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RowNumber = table.Column<int>(type: "int", nullable: false),
+                    BinName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tx_SalesOrder_ItemSecond_Bin", x => x.DetDetId);
+                    table.ForeignKey(
+                        name: "FK_Tx_SalesOrder_ItemSecond_Bin_Tx_SalesOrder_ItemSecond_DetId",
+                        column: x => x.DetId,
+                        principalTable: "Tx_SalesOrder_ItemSecond",
+                        principalColumn: "DetId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Tx_SalesOrder_Item_Id_RowNumber",
                 table: "Tx_SalesOrder_Item",
@@ -121,9 +161,21 @@ namespace DddEf.Infrastructure.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tx_SalesOrder_Item_Bin_DetId_RowNumber",
+                table: "Tx_SalesOrder_Item_Bin",
+                columns: new[] { "DetId", "RowNumber" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tx_SalesOrder_ItemSecond_Id_RowNumber",
                 table: "Tx_SalesOrder_ItemSecond",
                 columns: new[] { "Id", "RowNumber" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tx_SalesOrder_ItemSecond_Bin_DetId_RowNumber",
+                table: "Tx_SalesOrder_ItemSecond_Bin",
+                columns: new[] { "DetId", "RowNumber" },
                 unique: true);
         }
 
@@ -135,6 +187,12 @@ namespace DddEf.Infrastructure.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tm_Item");
+
+            migrationBuilder.DropTable(
+                name: "Tx_SalesOrder_Item_Bin");
+
+            migrationBuilder.DropTable(
+                name: "Tx_SalesOrder_ItemSecond_Bin");
 
             migrationBuilder.DropTable(
                 name: "Tx_SalesOrder_Item");
