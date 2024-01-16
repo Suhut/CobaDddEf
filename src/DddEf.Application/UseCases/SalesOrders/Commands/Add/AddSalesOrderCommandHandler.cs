@@ -10,10 +10,7 @@ namespace DddEf.Application.UseCases.SalesOrders.Commands.Add;
 public sealed class AddSalesOrderCommandHandler(IDddEfContext dddEfContext) : IRequestHandler<AddSalesOrderCommand, Guid>
 {
     public async Task<Guid> Handle(AddSalesOrderCommand request, CancellationToken cancellationToken)
-    {
-        //var rowNumberItem = 1;
-        //var rowNumberItemSecond = 1;
-
+    { 
         var salesOrder = SalesOrder.Create(
          request.TransNo,
          request.TransDate,

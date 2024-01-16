@@ -72,40 +72,7 @@ public class SalesOrderConfiguration : AggregateRootConfiguration<SalesOrder>
                    .Property(street => street.Country)
                    .HasMaxLength(50)
                    ;
-           });
-
-
-        ////ValueObject as different table
-        //builder.OwnsOne(
-        //   salesOrder => salesOrder.BillAddress,
-        //   sb =>
-        //   {
-        //       sb
-        //           .ToTable("Tx_SalesOrder__BillAddress");
-
-        //       sb
-        //           .Property(street => street.City)
-        //           .HasMaxLength(50)
-        //           ;
-
-        //       sb
-        //           .Property(street => street.Country)
-        //           .HasMaxLength(50)
-        //           ;
-
-        //       sb
-        //           .WithOwner()
-        //           .HasForeignKey("Id");
-
-        //       sb
-        //           .Property<Guid>("DetId");
-
-        //       sb
-        //           .HasKey("DetId");
-
-        //   });
-
-
+           }); 
 
         builder.Property("CreatedDateOffset");
 

@@ -1,7 +1,6 @@
 ﻿using DddEf.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using static Dapper.SqlMapper;
 
 namespace DddEf.Application.UseCases.SalesOrders.Queries;
 
@@ -10,7 +9,7 @@ public class GetSalesOrdersLinqQuery : IRequest<List<SalesOrderRes>>
     public DateTime DateFrom { get; set; }
     public DateTime DateTo { get; set; }
 }
-public class GetSalesOrdersLinqQueryHandler(ISqlDapperClient dapperClient, IDddEfContext dddEfContext) : IRequestHandler<GetSalesOrdersLinqQuery, List<SalesOrderRes>>
+public class GetSalesOrdersLinqQueryHandler(IDddEfContext dddEfContext) : IRequestHandler<GetSalesOrdersLinqQuery, List<SalesOrderRes>>
 {
     public async Task<List<SalesOrderRes>> Handle(GetSalesOrdersLinqQuery request, CancellationToken cancellationToken)
     {
@@ -55,7 +54,7 @@ public class GetSalesOrdersLinqQueryHandler(ISqlDapperClient dapperClient, IDddE
                                             ).ToList(),
                                         }
 
-                                 ).AsList(),
+                                 ).ToList(),
                                ItemSeconds = (
                                         from T0_ in T0.ItemSeconds
                                         join T1_ in dddEfContext.Items.AsNoTracking() on T0_.ItemId equals T1_.Id
@@ -82,9 +81,9 @@ public class GetSalesOrdersLinqQueryHandler(ISqlDapperClient dapperClient, IDddE
                                             ).ToList(),
                                         }
 
-                                 ).AsList()
+                                 ).ToList()
                            }
-                     ).AsList();
+                     ).ToList();
 
 
         return salesOrders;
