@@ -20,19 +20,19 @@ public sealed class AddSalesOrderCommandHandler(IDddEfContext dddEfContext) : IR
          new CustomerId(request.CustomerId),
          request.ShipAddress,
          request.BillAddress,
-         request.Items.Select((value, index) => SalesOrderItem.Create(
-               index + 1,
-             new ItemId(value.ItemId),
-             value.Qty,
-             value.Price,
-             value.Bins.Select((value, index) => SalesOrderItemBin.Create(index + 1, value.BinName)).ToList()
+         request.Items.Select((item, itemIndex) => SalesOrderItem.Create(
+               itemIndex + 1,
+             new ItemId(item.ItemId),
+             item.Qty,
+             item.Price,
+             item.Bins.Select((bin, binIndex) => SalesOrderItemBin.Create(binIndex + 1, bin.BinName)).ToList()
              )).ToList(),
-         request.ItemSeconds.Select((value, index) => SalesOrderItemSecond.Create(
-             index + 1,
-             new ItemId(value.ItemId),
-             value.Qty,
-             value.Price,
-             value.Bins.Select((value, index) => SalesOrderItemSecondBin.Create(index + 1, value.BinName)).ToList()
+         request.ItemSeconds.Select((item, itemIndex) => SalesOrderItemSecond.Create(
+             itemIndex + 1,
+             new ItemId(item.ItemId),
+             item.Qty,
+             item.Price,
+             item.Bins.Select((bin, binIndex) => SalesOrderItemSecondBin.Create(binIndex + 1, bin.BinName)).ToList()
              )).ToList()
          );
 
