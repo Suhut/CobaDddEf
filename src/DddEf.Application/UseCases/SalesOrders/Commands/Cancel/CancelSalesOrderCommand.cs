@@ -1,5 +1,4 @@
-﻿using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
-using MediatR;
+﻿using MediatR;
 
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Cancel;
 public record CancelSalesOrderCommand

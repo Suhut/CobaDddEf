@@ -2,8 +2,6 @@
 using DddEf.Application.UseCases.Items.Commands;
 using DddEf.Application.UseCases.SalesOrders.Commands.Add;
 using DddEf.Application.UseCases.SalesOrders.Queries;
-using DddEf.Domain.Aggregates.SalesOrder;
-using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using DddEf.Domain.Common.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
