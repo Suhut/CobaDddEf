@@ -51,8 +51,8 @@ public class CloseSalesOrderTests : BaseTestFixture
             new Address("Jakarta", "Indonesia"),
             new List<AddSalesOrderItemVm>
             {
-                new AddSalesOrderItemVm(itemId1,1,1000),
-                new AddSalesOrderItemVm(itemId2,2,2000)
+                new AddSalesOrderItemVm(itemId1,1,1000,[]),
+                new AddSalesOrderItemVm(itemId2,2,2000,[])
             },
             []
         );

@@ -9,4 +9,5 @@ public class SalesOrderItemVm
     public double? Qty { get; set; }
     public double? Price { get; set; }
     public double? Total { get; set; }
+    public List<SalesOrderItemBinVm> Bins { set; get; } = [];
 }

@@ -69,14 +69,14 @@ public class AddSalesOrderTests : BaseTestFixture
             new Address("Jakarta", "Indonesia"),
             new List<AddSalesOrderItemVm>
             {
-                new AddSalesOrderItemVm(itemId1,1,1000),
-                new AddSalesOrderItemVm(itemId2,2,2000)
+                new AddSalesOrderItemVm(itemId1,1,1000,[]),
+                new AddSalesOrderItemVm(itemId2,2,2000,[])
             },
             new List<AddSalesOrderItemSecondVm>
             {
-                new AddSalesOrderItemSecondVm(itemId3,3,3000),
-                new AddSalesOrderItemSecondVm(itemId4,4,4000),
-                new AddSalesOrderItemSecondVm(itemId5,5,5000)
+                new AddSalesOrderItemSecondVm(itemId3,3,3000,[]),
+                new AddSalesOrderItemSecondVm(itemId4,4,4000,[]),
+                new AddSalesOrderItemSecondVm(itemId5,5,5000,[])
             }
         );
 
@@ -89,14 +89,14 @@ public class AddSalesOrderTests : BaseTestFixture
                     new Address("Jakarta", "Indonesia"),
                     new List<AddSalesOrderItemVm>
                     {
-                new AddSalesOrderItemVm(itemId1,5,5000),
-                new AddSalesOrderItemVm(itemId2,4,4000)
+                new AddSalesOrderItemVm(itemId1,5,5000,[]),
+                new AddSalesOrderItemVm(itemId2,4,4000,[])
                     },
                     new List<AddSalesOrderItemSecondVm>
                     {
-                new AddSalesOrderItemSecondVm(itemId3,3,3000),
-                new AddSalesOrderItemSecondVm(itemId4,2,2000),
-                new AddSalesOrderItemSecondVm(itemId5,1,1000)
+                new AddSalesOrderItemSecondVm(itemId3,3,3000,[]),
+                new AddSalesOrderItemSecondVm(itemId4,2,2000,[]),
+                new AddSalesOrderItemSecondVm(itemId5,1,1000,[])
                     }
                 );
 

@@ -11,28 +11,29 @@ public sealed class AddSalesOrderCommandHandler(IDddEfContext dddEfContext) : IR
 {
     public async Task<Guid> Handle(AddSalesOrderCommand request, CancellationToken cancellationToken)
     {
-        var rowNumberItem = 1;
-        var rowNumberItemSecond = 1;
+        //var rowNumberItem = 1;
+        //var rowNumberItemSecond = 1;
+
         var salesOrder = SalesOrder.Create(
          request.TransNo,
          request.TransDate,
          new CustomerId(request.CustomerId),
          request.ShipAddress,
          request.BillAddress,
-         request.Items.ConvertAll(item => SalesOrderItem.Create(
-             rowNumberItem++,
-             new ItemId(item.ItemId),
-             item.Qty,
-             item.Price,
-             []
-             )),
-         request.ItemSeconds.ConvertAll(item => SalesOrderItemSecond.Create(
-             rowNumberItemSecond++,
-             new ItemId(item.ItemId),
-             item.Qty,
-             item.Price,
-             []
-             ))
+         request.Items.Select((value, index) => SalesOrderItem.Create(
+               index + 1,
+             new ItemId(value.ItemId),
+             value.Qty,
+             value.Price,
+             value.Bins.Select((value, index) => SalesOrderItemBin.Create(index + 1, value.BinName)).ToList()
+             )).ToList(),
+         request.ItemSeconds.Select((value, index) => SalesOrderItemSecond.Create(
+             index + 1,
+             new ItemId(value.ItemId),
+             value.Qty,
+             value.Price,
+             value.Bins.Select((value, index) => SalesOrderItemSecondBin.Create(index + 1, value.BinName)).ToList()
+             )).ToList()
          );
 
         await dddEfContext.SalesOrders.AddAsync(salesOrder, cancellationToken);

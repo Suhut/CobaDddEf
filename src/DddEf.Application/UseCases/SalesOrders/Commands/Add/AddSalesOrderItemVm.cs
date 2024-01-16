@@ -3,5 +3,6 @@
 public record AddSalesOrderItemVm(
     Guid ItemId,
     double Qty,
-    double Price
+    double Price,
+    List<AddSalesOrderItemBinVm> Bins
 );
