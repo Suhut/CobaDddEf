@@ -69,14 +69,34 @@ public class AddSalesOrderTests : BaseTestFixture
             new Address("Jakarta", "Indonesia"),
             new List<AddSalesOrderItemVm>
             {
-                new AddSalesOrderItemVm(itemId1,1,1000,[]),
-                new AddSalesOrderItemVm(itemId2,2,2000,[])
+                new AddSalesOrderItemVm(itemId1,1,1000, new List<AddSalesOrderItemBinVm>
+                                                        {
+                                                            new ("01"),
+                                                            new ("02")
+                                                        }),
+                new AddSalesOrderItemVm(itemId2,2,2000,new List<AddSalesOrderItemBinVm>
+                                                        {
+                                                            new ("03"),
+                                                            new ("04")
+                                                        })
             },
             new List<AddSalesOrderItemSecondVm>
             {
-                new AddSalesOrderItemSecondVm(itemId3,3,3000,[]),
-                new AddSalesOrderItemSecondVm(itemId4,4,4000,[]),
-                new AddSalesOrderItemSecondVm(itemId5,5,5000,[])
+                new AddSalesOrderItemSecondVm(itemId3,3,3000,new List<AddSalesOrderItemSecondBinVm>
+                                                        {
+                                                            new ("01"),
+                                                            new ("02")
+                                                        }),
+                new AddSalesOrderItemSecondVm(itemId4,4,4000,new List<AddSalesOrderItemSecondBinVm>
+                                                        {
+                                                            new ("03"),
+                                                            new ("04")
+                                                        }),
+                new AddSalesOrderItemSecondVm(itemId5,5,5000,new List<AddSalesOrderItemSecondBinVm>
+                                                        {
+                                                            new ("05"),
+                                                            new ("06")
+                                                        })
             }
         );
 
@@ -89,14 +109,34 @@ public class AddSalesOrderTests : BaseTestFixture
                     new Address("Jakarta", "Indonesia"),
                     new List<AddSalesOrderItemVm>
                     {
-                new AddSalesOrderItemVm(itemId1,5,5000,[]),
-                new AddSalesOrderItemVm(itemId2,4,4000,[])
+                new AddSalesOrderItemVm(itemId1,5,5000,new List<AddSalesOrderItemBinVm>
+                                                        {
+                                                            new ("05"),
+                                                            new ("06")
+                                                        }),
+                new AddSalesOrderItemVm(itemId2,4,4000,new List<AddSalesOrderItemBinVm>
+                                                        {
+                                                            new ("07"),
+                                                            new ("08")
+                                                        })
                     },
                     new List<AddSalesOrderItemSecondVm>
                     {
-                new AddSalesOrderItemSecondVm(itemId3,3,3000,[]),
-                new AddSalesOrderItemSecondVm(itemId4,2,2000,[]),
-                new AddSalesOrderItemSecondVm(itemId5,1,1000,[])
+                new AddSalesOrderItemSecondVm(itemId3,3,3000,new List<AddSalesOrderItemSecondBinVm>
+                                                        {
+                                                            new ("07"),
+                                                            new ("08")
+                                                        }),
+                new AddSalesOrderItemSecondVm(itemId4,2,2000,new List<AddSalesOrderItemSecondBinVm>
+                                                        {
+                                                            new ("09"),
+                                                            new ("10")
+                                                        }),
+                new AddSalesOrderItemSecondVm(itemId5,1,1000,new List<AddSalesOrderItemSecondBinVm>
+                                                        {
+                                                            new ("11"),
+                                                            new ("12")
+                                                        })
                     }
                 );
 
