@@ -1,4 +1,5 @@
 ﻿using DddEf.Application.UseCases.Customers.Commands;
+using DddEf.Application.UseCases.Customers.Queries;
 using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -16,8 +17,16 @@ namespace DddEf.Api.Controllers
             _sender = sender;
         }
 
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<CustomerRes>> GetById(CustomerId id)
+        {
+            var cmd = new GetCustomerByIdQuery { Id = id };
+            return await _sender.Send(cmd);
+        }
+
         [HttpPost("[action]")]
-        public async Task<ActionResult<Guid>> Add(AddCustomerCommand request)
+        public async Task<ActionResult<CustomerId>> Add(AddCustomerCommand request)
         {  
             return await _sender.Send(request);
         }
