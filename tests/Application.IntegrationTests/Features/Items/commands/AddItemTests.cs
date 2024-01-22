@@ -1,6 +1,5 @@
 ﻿using DddEf.Application.UseCases.Items.Commands;
 using DddEf.Domain.Aggregates.Item;
-using DddEf.Domain.Aggregates.Item.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -24,7 +23,7 @@ public class AddItemTests : BaseTestFixture
         var itemId = await SendAsync(command);
 
         // Assert
-        var item = await FindAsync<Item>(new ItemId(itemId));
+        var item = await FindAsync<Item>(itemId);
 
         item.Should().NotBeNull();
         item!.ItemCode.Should().Be(command.ItemCode);

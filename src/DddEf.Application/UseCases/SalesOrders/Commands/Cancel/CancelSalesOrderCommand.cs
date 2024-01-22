@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
+using MediatR;
 
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Cancel;
 public record CancelSalesOrderCommand
-( 
-    Guid Id
-) : IRequest<Guid>;
+(
+    SalesOrderId Id
+) : IRequest<SalesOrderId>;
  

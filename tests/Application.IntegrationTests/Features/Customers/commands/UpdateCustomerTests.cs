@@ -19,14 +19,12 @@ public class UpdateCustomerTests : BaseTestFixture
             "Code001",
             "Name001"
         );
-        var customerId = await SendAsync(command);
-        var customer = await FindAsync<Customer>(new CustomerId(customerId));
-
+        var customerId = await SendAsync(command);  
 
         // Act
         var commandUpdate = new UpdateCustomerCommand
        (
-            new CustomerId(customerId),
+            customerId,
            "Code001",
            "Name001"
        );

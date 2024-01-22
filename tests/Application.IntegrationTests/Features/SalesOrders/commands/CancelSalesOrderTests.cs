@@ -71,7 +71,7 @@ public class CancelSalesOrderTests : BaseTestFixture
 
 
         // Assert
-        var salesOrder = await FindAsync<SalesOrder>(new SalesOrderId(salesOrderId));
+        var salesOrder = await FindAsync<SalesOrder>(salesOrderId);
 
         salesOrder.Should().NotBeNull();
     }

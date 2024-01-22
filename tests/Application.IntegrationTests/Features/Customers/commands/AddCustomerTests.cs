@@ -24,7 +24,7 @@ public class AddItemTests : BaseTestFixture
         var customerId = await SendAsync(command); 
 
         // Assert
-        var customer = await FindAsync<Customer>(new CustomerId(customerId));
+        var customer = await FindAsync<Customer>(customerId);
 
         customer.Should().NotBeNull();
         customer!.CustomerCode.Should().Be(command.CustomerCode);

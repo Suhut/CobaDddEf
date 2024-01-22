@@ -61,8 +61,8 @@ public class ConcurrencyTransactionTest : BaseTestFixture
         var salesOrderId = await SendAsync(createSalesOrderCommand);
 
 
-        var entity1 = await FindAsync<SalesOrder>(new SalesOrderId(salesOrderId));
-        var entity2 = await FindAsync<SalesOrder>(new SalesOrderId(salesOrderId));
+        var entity1 = await FindAsync<SalesOrder>(salesOrderId);
+        var entity2 = await FindAsync<SalesOrder>(salesOrderId);
 
 
         entity1.Close();

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace DddEf.Application.UseCases.SalesOrders.Commands.Close;
 public record CloseSalesOrderCommand
-( 
-    Guid Id
-) : IRequest<Guid>;
+(
+    SalesOrderId Id
+) : IRequest<SalesOrderId>;
  

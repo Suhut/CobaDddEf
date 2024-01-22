@@ -1,4 +1,6 @@
 using DddEf.Domain.Aggregates.Customer.ValueObjects;
+using DddEf.Domain.Aggregates.Item.ValueObjects;
+using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using DddEf.Infrastructure;
 using Microsoft.OpenApi.Models;
 
@@ -17,6 +19,8 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddSwaggerGen(c =>
 {
     c.MapType<CustomerId>(() => new OpenApiSchema { Type = "string", Format = "uuid" });
+    c.MapType<ItemId>(() => new OpenApiSchema { Type = "string", Format = "uuid" });
+    c.MapType<SalesOrderId>(() => new OpenApiSchema { Type = "string", Format = "uuid" });
 });
 
 var app = builder.Build();
