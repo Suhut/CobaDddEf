@@ -178,11 +178,19 @@ public class AddSalesOrderTests : BaseTestFixture
 
         {
 
-            var getSalesOrdersQuery = new GetSalesOrdersLinqQuery { DateFrom= DateTime.Now.Date, DateTo = DateTime.Now.Date };
+            var getSalesOrdersQuery = new GetSalesOrdersLinqQuery { DateFrom = DateTime.Now.Date, DateTo = DateTime.Now.Date };
             var salesOrders = await SendAsync(getSalesOrdersQuery);
             salesOrders.Should().NotBeNull();
 
         }
+
+        //{
+
+        //    var getSalesOrdersQuery = new GetSalesOrdersLinq02Query { DateFrom = DateTime.Now.Date, DateTo = DateTime.Now.Date };
+        //    var salesOrders = await SendAsync(getSalesOrdersQuery);
+        //    salesOrders.Should().NotBeNull();
+
+        //}
 
     }
 }

@@ -83,7 +83,7 @@ public class GetSalesOrdersLinqQueryHandler(IDddEfContext dddEfContext) : IReque
 
                                  ).ToList()
                            }
-                     ).ToList();
+                     ).OrderBy(p=>p.TransDate).Skip(1).Take(10).ToList();
 
 
         return salesOrders;

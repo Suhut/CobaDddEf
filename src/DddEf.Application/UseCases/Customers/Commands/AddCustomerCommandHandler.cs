@@ -16,7 +16,7 @@ public sealed class AddItemCommandHandler (IDddEfContext dddEfContext) : IReques
         await dddEfContext.Customers.AddAsync(customer, cancellationToken);
 
         await dddEfContext.SaveChangesAsync(cancellationToken);
-         
+          
         return customer.Id.Value;
     }
 }
