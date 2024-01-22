@@ -9,3 +9,21 @@ Content-Type: application/json
 }
 
 ###
+
+POST {{DddEf.Api_HostAddress}}/api/customers/add
+Content-Type: application/json
+
+{
+  "CustomerCode":"C002",
+  "CustomerName":"N002"
+}
+
+###
+POST {{DddEf.Api_HostAddress}}/api/customers/update
+Content-Type: application/json
+
+{
+  "Id":"BDBBACC4-748E-46C1-B3C8-55E919728307",
+  "CustomerCode":"C002",
+  "CustomerName":"N002"
+}

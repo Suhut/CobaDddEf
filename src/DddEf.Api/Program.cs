@@ -1,8 +1,11 @@
-
+using DddEf.Domain.Aggregates.Customer.ValueObjects;
 using DddEf.Infrastructure;
+using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+
 
 // Add services to the container.
 
@@ -11,7 +14,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.MapType<CustomerId>(() => new OpenApiSchema { Type = "string", Format = "uuid" });
+});
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

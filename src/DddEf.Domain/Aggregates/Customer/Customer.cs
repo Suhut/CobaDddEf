@@ -28,5 +28,12 @@ public sealed class Customer : AggregateRoot
     }
 
 
+    public void Edit(string customerCode, string? customerName)
+    {
+        ArgumentNullException.ThrowIfNull(Id);
+
+        CustomerCode = customerCode;
+        CustomerName = customerName;
+    }
 
 }

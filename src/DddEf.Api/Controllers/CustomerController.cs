@@ -21,5 +21,11 @@ namespace DddEf.Api.Controllers
         {  
             return await _sender.Send(request);
         }
+
+        [HttpPost("[action]")]
+        public async Task<ActionResult<CustomerId>> Update(UpdateCustomerCommand request)
+        {
+            return await _sender.Send(request);
+        }
     }
 }
