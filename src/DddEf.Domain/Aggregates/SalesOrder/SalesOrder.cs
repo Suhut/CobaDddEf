@@ -10,7 +10,7 @@ public sealed class SalesOrder : AggregateRoot
     public SalesOrderId Id { get; private set; }
     public string TransNo { get; private set; }
     public DateTime TransDate { get; private set; }
-    public string Status { get; private set; }
+    public SalesOrderStatus Status { get; private set; }
     public CustomerId CustomerId { get; private set; }
     public Address ShipAddress { get; private set; }
     public Address BillAddress { get; private set; }
@@ -41,7 +41,7 @@ public sealed class SalesOrder : AggregateRoot
         Id = id;
         TransNo = transNo;
         TransDate = transDate;
-        Status = "Open";
+        Status = SalesOrderStatus.Open;
         CustomerId = customerId;
         BillAddress = billAddress;
         ShipAddress = shipAddress;
@@ -65,14 +65,14 @@ public sealed class SalesOrder : AggregateRoot
     {
         ArgumentNullException.ThrowIfNull(Id);
 
-        Status = "Cancelled"; 
+        Status = SalesOrderStatus.Cancelled; 
     }
 
     public void Close()
     {
         ArgumentNullException.ThrowIfNull(Id);
 
-        Status = "Closed";
+        Status = SalesOrderStatus.Closed;
         foreach(SalesOrderItem item in _items)
         {
             item.Close();

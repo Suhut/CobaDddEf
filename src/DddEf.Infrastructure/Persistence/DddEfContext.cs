@@ -26,7 +26,14 @@ namespace DddEf.Infrastructure.Persistence
 
         public DbSet<Customer> Customers { get; set; } = null!;
         public DbSet<Item> Items { get; set; } = null!;
-        public DbSet<SalesOrder> SalesOrders { get; set; } = null!; 
+        public DbSet<SalesOrder> SalesOrders { get; set; } = null!;
+
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            base.ConfigureConventions(configurationBuilder);
+
+            configurationBuilder.Properties<Enum>().HaveConversion<string>();
+        }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

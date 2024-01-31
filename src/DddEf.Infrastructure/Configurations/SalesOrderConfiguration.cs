@@ -6,6 +6,7 @@ using DddEf.Domain.Aggregates.SalesOrder.ValueObjects;
 using DddEf.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Extensions.Configuration;
 
 namespace DddEf.Infrastructure.Configurations;
 
